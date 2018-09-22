@@ -1,0 +1,17 @@
+@import "../../../styles/variable.scss";
+
+.course-list-item {
+    border: 1px solid white;
+    &:hover {
+        border-color: $color-primary-light
+    }
+}
+
+.course-list-group-header {
+    margin: 16px 0;
+    font-weight: bold;
+    font-size: 16px;
+    &:not(:first-child) {
+        margin-top: 32px;
+    }
+}

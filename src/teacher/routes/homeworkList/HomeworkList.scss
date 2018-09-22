@@ -1,0 +1,19 @@
+@import "../../../styles/variable";
+
+.selectedInputPages-wrapper {
+    display: inline-block;
+    width: 100%;
+    margin-top: 30px;
+    padding-left: 9px;
+
+    .selectedInputPages {
+        width: 25%;
+        float: left;
+    }
+}
+
+.homework-list-item {
+    .small-padding-cell {
+        padding: 4px 8px !important;
+    }
+}

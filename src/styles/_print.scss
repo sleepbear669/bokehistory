@@ -1,0 +1,14 @@
+@page {
+    size: A4;
+}
+
+@media print {
+    html, body {
+        margin: 0;
+        padding: 0;
+        background: white !important;
+    }
+    .no-print {
+        display: none !important;
+    }
+}

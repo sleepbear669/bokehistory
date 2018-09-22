@@ -1,0 +1,164 @@
+/*
+Application Settings Go Here
+------------------------------------
+This file acts as a bundler for all variables/mixins/themes, so they
+can easily be swapped out without `core.scss` ever having to know.
+
+For example:
+
+@import './variables/colors';
+@import './variables/components';
+@import './themes/default';
+*/
+@import './variable.scss';
+@import './burma-grid';
+@import './tiles';
+@import './print';
+
+body {
+    color: $color-text-dark;
+    word-wrap: break-word;
+    -webkit-overflow-scrolling: touch;
+    font-size: 13px;
+    background: $background;
+    -webkit-font-smoothing: subpixel-antialiased;
+    text-rendering: optimizeLegibility;
+}
+
+.pull-left {
+    float: left;
+}
+
+.pull-right {
+    float: right;
+}
+
+.hide {
+    display: none;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    border-spacing: 0;
+
+    caption {
+        font-size: 15px;
+        border-bottom: solid 1px #e1e1e1;
+        text-align: left;
+        padding-bottom: 8px;
+    }
+    thead {
+        > tr {
+            height: 56px;
+            font-size: 15px;
+            text-align: center;
+            letter-spacing: -0.5px;
+        }
+        border-bottom: 1px solid $color-secondary;
+    }
+    tbody {
+        tr {
+            height: 48px;
+            border-bottom: 1px solid #e1e1e1;
+            &:hover {
+                background: $background;
+            }
+        }
+    }
+    td {
+        padding: 0 16px;
+        text-align: center;
+        &:first-child {
+            text-align: left;
+        }
+    }
+}
+
+.card {
+    border-radius: 6px;
+    background-color: $white;
+    padding: 16px;
+}
+
+.container {
+    //width: 90%;
+    max-width: 1080px;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 0 12px;
+
+    //@media only screen and (min-width: $breakpoint-small) {
+    //    width: 80%;
+    //}
+    //
+    height: 100%;
+}
+
+.center {
+    text-align: center;
+}
+
+.center-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.loading-view {
+    display: inline-block;
+    width: 50px;
+    color: transparent !important;
+    pointer-events: none;
+    margin: 0;
+    &:after {
+        -webkit-animation: spinAround 500ms infinite linear;
+        animation: spinAround 500ms infinite linear;
+        border: 2px solid #f00;
+        border-radius: 1em;
+        border-right-color: transparent;
+        border-top-color: transparent;
+        content: "";
+        display: block;
+        height: 1em;
+        width: 1em;
+        margin-left: calc(50% - .5em);
+        margin-top: -1em;
+    }
+}
+
+.loading-view-container {
+    padding: 24px;
+    text-align: center;
+}
+
+.font-color-text-light {
+    color: $color-text-light;
+}
+
+@media screen and (max-width: 850px) {
+    .hide-when-w-850 {
+        display: none !important;
+    }
+    .show-when-w-850 {
+        display: block !important;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .hide-when-w-768 {
+        display: none !important;
+    }
+}
+
+@media screen and (min-width: 850px) {
+    .hide-when-w-over-850 {
+        display: none !important;
+    }
+}
+
+@media screen and (max-height: 680px) {
+    .hide-when-h-680 {
+        display: none !important;
+    }
+}

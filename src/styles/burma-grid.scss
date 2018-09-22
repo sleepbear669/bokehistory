@@ -1,0 +1,198 @@
+@import "variable";
+
+$gutter: 8px;
+
+.column {
+    display: block;
+    flex-basis: 0;
+    flex-grow: 1;
+    flex-shrink: 1;
+    padding: $gutter;
+    &.is-narrow {
+        flex: none
+    }
+    &.is-full {
+        flex: none;
+        width: 100%
+    }
+    &.is-three-quarters {
+        flex: none;
+        width: 75%
+    }
+    &.is-two-thirds {
+        flex: none;
+        width: 66.6666%
+    }
+    &.is-half {
+        flex: none;
+        width: 50%
+    }
+    &.is-one-third {
+        flex: none;
+        width: 33.3333%
+    }
+    &.is-one-quarter {
+        flex: none;
+        width: 25%
+    }
+    &.is-offset-three-quarters {
+        margin-left: 75%
+    }
+    &.is-offset-two-thirds {
+        margin-left: 66.6666%
+    }
+    &.is-offset-half {
+        margin-left: 50%
+    }
+    &.is-offset-one-third {
+        margin-left: 33.3333%
+    }
+    &.is-offset-one-quarter {
+        margin-left: 25%
+    }
+    @for $i from 1 through 12 {
+        &.is-#{$i} {
+            flex: none;
+            width: ($i / 12) * 100%
+        }
+        &.is-offset-#{$i} {
+            margin-left: ($i / 12) * 100%
+        }
+    }
+}
+
+.row {
+    margin-left: -$gutter;
+    margin-right: -$gutter;
+    margin-top: -$gutter;
+    display: flex;
+    &:last-child {
+        margin-bottom: -$gutter
+    }
+    //&:not(:last-child) {
+    //    margin-bottom: $gutter
+    //}
+    // Modifiers
+    &.is-centered {
+        justify-content: center
+    }
+    &.is-gapless {
+        margin-left: 0;
+        margin-right: 0;
+        margin-top: 0;
+        &:last-child {
+            margin-bottom: 0
+        }
+        //&:not(:last-child) {
+        //    margin-bottom: $gutter*2
+        //}
+        & > .column {
+            margin: 0;
+            padding: 0
+        }
+        &.is-grid {
+            flex-wrap: wrap;
+            & > .column {
+                max-width: 33.3333%;
+                padding: $gutter;
+                width: 33.3333%
+            }
+            & + .column {
+                margin-left: 0
+            }
+        }
+        &.is-mobile {
+            display: flex
+        }
+        &.is-multiline {
+            flex-wrap: wrap
+        }
+    }
+}
+
+.is-flex {
+    display: flex;
+}
+
+.is-vcentered {
+    align-items: center
+}
+
+.is-hcentered {
+    justify-content: center;
+}
+
+.is-flex-pull-right {
+    justify-content: flex-end;
+}
+
+.flex-1 {
+    flex: 1;
+}
+
+.flex-2 {
+    flex: 2;
+}
+
+.flex-3 {
+    flex: 3;
+}
+
+.flex-4 {
+    flex: 4;
+}
+
+.flex-5 {
+    flex: 5;
+}
+
+.flex-6 {
+    flex: 6;
+}
+
+.flex-7 {
+    flex: 7;
+}
+
+.flex-8 {
+    flex: 8;
+}
+
+.flex-9 {
+    flex: 9;
+}
+
+.flex-10 {
+    flex: 10;
+}
+
+.flex-11 {
+    flex: 11;
+}
+
+.no-margin {
+    margin: 0;
+}
+
+.bottom-line {
+    border-bottom: 1px solid #676767;
+}
+
+.bottom-line-light {
+    border-bottom: 1px solid #e1e1e1;
+}
+
+.simple-list-header {
+    height: 56px;
+}
+
+.simple-list-item {
+    display: flex;
+    min-height: 48px;
+    color: $color-text-dark;
+    text-decoration: none;
+}
+
+.padding-cell {
+    padding: 4px 16px !important;
+}

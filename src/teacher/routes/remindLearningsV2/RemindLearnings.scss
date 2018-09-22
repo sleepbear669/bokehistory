@@ -1,0 +1,202 @@
+@import "../../../styles/variable";
+
+.remind-learnings {
+    .tab-menu {
+        .tab-button {
+            background: transparent;
+            display: inline-block;
+            padding: 12px 18px 18px;
+            font-weight: bold;
+            border-radius: 2px 2px 0 0;
+            margin-bottom: -6px;
+            color: gray;
+            &.active {
+                background: white;
+                color: $color-primary;
+            }
+        }
+    }
+
+    .remind-learning-list-item {
+        .small-padding-cell {
+            padding: 4px 8px !important;
+        }
+    }
+
+    .remind-learning-list-group-header {
+        margin: 16px 0;
+        font-weight: bold;
+        font-size: 16px;
+    }
+}
+
+.complete-message {
+    text-align: center;
+    font-size: 20px;
+    color: $color-primary;
+    margin: 2em 0;
+}
+
+.preview-warning {
+    background: orange;
+    padding: 4px;
+    border-radius: 4px;
+    color: white;
+}
+
+.remind-learning-preview {
+    margin: 4px 0;
+    padding: 4px;
+    //border-radius: 4px;
+    //border: 1px solid rgba(33, 138, 231, 0.6);
+    display: flex;
+    > span {
+        display: block;
+        flex: 1;
+        padding: 0 8px;
+        font-size: 16px;
+        &:first-child {
+            border-right: 1px solid gray;
+            text-align: right;
+        }
+        &:last-child {
+            color: $color-primary;
+            .postfix {
+                font-size: 12px;
+                color: gray;
+            }
+        }
+    }
+
+    &.warning {
+        color: gray;
+        > span:last-child {
+            color: orange;
+        }
+    }
+}
+
+.preview-result-info {
+    text-align: center;
+    font-size: 20px;
+    color: $color-primary;
+    margin: 1em;
+    display: block;
+}
+
+.chapter-selected-counts {
+    align-self: center;
+    margin: 12px;
+    color: $color-primary;
+    font-weight: bold;
+}
+
+.candidate-item {
+    display: flex;
+    margin: 8px;
+
+    .title {
+        width: 25%;
+        border-right: 2px solid gray;
+        margin-right: 20px;
+        padding-right: 20px;
+        text-align: right;
+        line-height: 27px;
+    }
+
+    .learnings-container {
+        flex: 1;
+        line-height: 27px;
+
+        .learning-item {
+            padding: 4px;
+            display: inline-block;
+            margin: 0 4px 4px 0;
+            min-width: 2em;
+            min-height: 2em;
+            text-align: center;
+            line-height: 1.5em;
+            border-radius: 4px;
+        }
+
+        .learning-types- {
+            &RECOMMEND {
+                background: rgba(#f98631, 0.4);
+                color: darken(#f98631, 20);
+            }
+            &OPEN_HOMEWORK {
+                background: rgba(#ffd440, 0.4);
+                color: darken(#ffd440, 20);
+            }
+            &HOMEWORK {
+                background: rgba(#cdd23a, 0.4);
+                color: darken(#cdd23a, 20);
+            }
+            &REMIND {
+                background: rgba(#a184d6, 0.4);
+                color: darken(#a184d6, 20);
+            }
+            &TEXTBOOK {
+                background: #82e1b1;;
+                color: darken(#82e1b1, 20);
+            }
+        }
+    }
+}
+
+.MultiChapterPicker {
+    display: flex;
+
+    .chapter-select-box {
+        flex: 1;
+
+        .rootchpater-select {
+            display: flex;
+            .Select {
+                flex: 1;
+                margin-right: 12px;
+            }
+            .mad-btn {
+                height: unset;
+            }
+        }
+
+        .selected-list-header {
+            margin: 0;
+            height: 46px;
+            line-height: 46px;
+        }
+        .selected-list-body {
+
+            cursor: pointer;
+            margin: 0;
+            padding: 0;
+            max-height: 500px;
+            overflow: scroll;
+
+            .selected-chapter-item {
+                &:hover {
+                    background-color: #f5f5f5;
+                }
+                position: relative;
+                display: inline-flex;
+                height: 36px;
+                width: 100%;
+                margin-bottom: -1px;
+                background-color: #fff;
+                border: 1px solid #ddd;
+                align-items: center;
+                justify-content: space-between;
+                padding: 0 8px;
+                &:first-child {
+                    border-top-left-radius: 4px;
+                    border-top-right-radius: 4px;
+                }
+            }
+
+        }
+    }
+    .textbook-chapter-picker {
+        height: unset;
+    }
+}

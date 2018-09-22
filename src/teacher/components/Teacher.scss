@@ -1,0 +1,21 @@
+.notice-modal {
+    color: rgba(0, 0, 0, 0.84);
+
+    h1 {
+        font-size: 20px;
+        margin: 0;
+    }
+    .notice-content {
+        font-size: 14px;
+    }
+
+    .notice-list-item {
+        .excerpt > p {
+            color: gray;
+            font-size: 14px;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            overflow: hidden;
+        }
+    }
+}

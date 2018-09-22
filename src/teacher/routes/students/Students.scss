@@ -1,0 +1,44 @@
+@import "../../../styles/variable";
+
+.student-bundle-create {
+    .student-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+    .student-search-header {
+        display: flex;
+    }
+
+    .student-list {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    }
+}
+
+.add-students {
+    display: flex;
+}
+
+.update-student {
+    font-size: 15px;
+    align-items: center;
+    .Select {
+        text-align: left;
+    }
+    .Select-value-label {
+        padding-left: 5px;
+    }
+    //.Select-menu-outer {
+    //    padding-left: 10px;
+    //}
+    .Select-option {
+        padding-left: 10px;
+    }
+}
+
+.select-menu {
+    background-color: #037BFF;
+}
+
