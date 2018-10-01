@@ -36,9 +36,15 @@ const config = {
     // ----------------------------------
     compiler_babel: {
         cacheDirectory: true,
-        plugins: ['@babel/transform-runtime', 'lodash'
+        plugins: [
+            '@babel/transform-runtime',
+            'lodash',
+            "@babel/plugin-proposal-optional-chaining"
         ],
-        presets: ['@babel/preset-env', '@babel/preset-react']
+        presets: [
+            '@babel/preset-env',
+            '@babel/preset-react'
+        ]
     },
     compiler_devtool: sourceMap ? 'cheap-module-source-map' : 'eval',
     compiler_hash_type: 'hash',

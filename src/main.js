@@ -13,7 +13,6 @@ import './shared/util';
 // ========================================================
 const initialState = window.__INITIAL_STATE__;
 const store = createStore(initialState);
-
 // ========================================================
 // Render Setup
 // ========================================================
