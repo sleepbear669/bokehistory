@@ -1,11 +1,13 @@
 import React from 'react';
 import {Route, Switch} from 'react-router-dom';
-import GameHistory from 'gameHistory';
+import GameHistory from 'screen/gameHistory';
+import RegistryUser from 'screen/registryUser';
 
 export const createRoutes = (store) => (
     <div style={{height: '100%'}}>
         <Switch>
             <Route exact path="/" component={GameHistory}/>
+            <Route exact path="/registryUser" component={RegistryUser}/>
             <Route component={NoMatch}/>
         </Switch>
     </div>

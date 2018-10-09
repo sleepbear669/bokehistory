@@ -1,17 +1,8 @@
 import {combineReducers} from 'redux'
-import auth from 'modules/auth';
+import {firebaseStateReducer as firebase} from 'react-redux-firebase'
 
-export const makeRootReducer = (asyncReducers) => {
-    return combineReducers({
-        auth,
-        ...asyncReducers
-    })
-};
+const rootReducer = combineReducers({
+    firebase
+});
 
-export const injectReducer = (store, {key, reducer}) => {
-    if (Object.hasOwnProperty.call(store.asyncReducers, key)) return;
-    store.asyncReducers[key] = reducer;
-    store.replaceReducer(makeRootReducer(store.asyncReducers));
-};
-
-export default makeRootReducer
+export default rootReducer
