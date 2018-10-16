@@ -1,8 +1,9 @@
 import {connect} from 'react-redux';
 import RegistryUser from './RegistryUser';
-import {} from "./RegistryUser.modules";
+import {addUser} from "./RegistryUser.modules";
 
 const mapDispatchToProps = {
+    addUser
 };
 
 const mapStateToProps = (state) => ({

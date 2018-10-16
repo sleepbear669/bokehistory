@@ -1,12 +1,12 @@
 import React, {PureComponent} from 'react';
-import './RegistryUser.scss';
+import './RegistryGame.scss';
 import {
     TextField,
     Button,
     FormLabel
 } from '@material-ui/core';
 
-export default class RegistryUser extends PureComponent {
+export default class RegistryGame extends PureComponent {
     state = {
         name: '',
         error: false
@@ -27,7 +27,7 @@ export default class RegistryUser extends PureComponent {
     _submit = () => {
         this.props.addUser(this.state.name)
             .then(() => {
-                alert(`${this.state.name} 님 등록되셨습니다.`);
+                alert(`${this.state.name} 등록 완료`);
                 this.setState({name: '', error: false});
                 // this.props.history.push('/');
             })
@@ -38,13 +38,9 @@ export default class RegistryUser extends PureComponent {
         return (
             <section className="game-history">
                 <p className={'warning'}>
-                    <span>[주의]</span><br/>
-                    <span>닉네임은 한번 정하면 원칙적으로 변경이 불가능 합니다.</span><br/>
-                    <span>또한 1인 1아이디 원칙이며 재생성이 불가능 합니다.</span><br/>
-                    <span>충분히 생각해 보시고 입력하시기 바랍니다.</span><br/>
                 </p>
                 <TextField autoFocus
-                           label='아이디'
+                           label='게임 이름'
                            value={this.state.name}
                            onChange={this._handleChange('name')}
                            error={this.state.error}
@@ -52,7 +48,7 @@ export default class RegistryUser extends PureComponent {
                 <br/>
                 {
                     this.state.error &&
-                    <FormLabel error={this.state.error}>등록된 아이디입니다.</FormLabel>
+                    <FormLabel error={this.state.error}>등록된 게임입니다.</FormLabel>
                 }
                 <br/>
                 <Button className={'submit-btn'}

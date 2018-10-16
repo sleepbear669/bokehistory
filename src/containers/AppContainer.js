@@ -9,7 +9,7 @@ import {
     Divider,
     List,
     ListItem,
-    ListItemText
+    ListItemText, Select, MenuItem
 } from '@material-ui/core';
 import {
     blue
@@ -19,6 +19,8 @@ import {
     createMuiTheme,
     withStyles
 } from '@material-ui/core/styles';
+
+import BokeAppBar from './BokeAppBar';
 
 const theme = createMuiTheme({
     palette: {
@@ -56,26 +58,27 @@ class AppContainer extends Component {
     }
 
     render() {
-        const {routes, store, classes} = this.props;
+        const {routes, store, classes, navigation} = this.props;
 
         return (
             <MuiThemeProvider theme={theme}>
                 <Provider store={store}>
                     <Router>
                         <div className={classes.root}>
-                            <AppBar position="fixed"
-                                    color="primary"
-                                    className={classes.appBar}>
-                                <Typography variant="title" color="inherit">
-                                    보드케이브
-                                </Typography>
-                            </AppBar>
+                            <BokeAppBar></BokeAppBar>
                             <Drawer
                                 variant="permanent"
                                 classes={{
                                     paper: classes.drawerPaper,
                                 }}
                             >
+                                <Select>
+                                    <MenuItem value=""><em>None</em>
+                                    </MenuItem>
+                                    <MenuItem value={10}>마백마작</MenuItem>
+                                    <MenuItem value={20}>리치마작</MenuItem>
+                                    <MenuItem value={30}>Thirty</MenuItem>
+                                </Select>
                                 <List>
                                     <ListItem button>
                                         <ListItemText primary='리치 마작'/>
@@ -94,6 +97,9 @@ class AppContainer extends Component {
                                     </ListItem>
                                     <ListItem button component={Link} to="/registryUser">
                                         <ListItemText primary='사용자 등록'/>
+                                    </ListItem>
+                                    <ListItem button component={Link} to="/registryGame">
+                                        <ListItemText primary='게임 등록'/>
                                     </ListItem>
                                 </List>
                             </Drawer>

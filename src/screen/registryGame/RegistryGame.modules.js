@@ -1,19 +1,18 @@
-import userService from './../../shared/services/userService';
+import gameService from './../../shared/services/gameService';
 
-const ADD_USER = 'ADD_USER';
+const ADD_GAME = 'ADD_GAME';
 
 const ACTION_HANDLERS = {
-    [ADD_USER]: () => {}
 };
 
 export function addUser(name) {
     return async dispatch => {
-        const doc = await userService.fetchUserByName(name);
+        const doc = await gameService.fetchUserByName(name);
         if (!doc.exists) {
-            await userService.addUser(name);
-            dispatch({type: ADD_USER})
+            await gameService.addUser(name);
+            dispatch({type: ADD_GAME})
         }else {
-            throw '등록된 이름입니다.';
+            throw '등록된 게임입니다.';
         }
     }
 }
