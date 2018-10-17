@@ -3,6 +3,7 @@ import {Route, Switch} from 'react-router-dom';
 import GameHistory from 'screen/gameHistory';
 import RegistryUser from 'screen/registryUser';
 import RegistryGame from 'screen/registryGame';
+import RecordGame from 'screen/recordGame';
 
 export const createRoutes = (store) => (
     <div style={{height: '100%'}}>
@@ -10,6 +11,7 @@ export const createRoutes = (store) => (
             <Route exact path="/" component={GameHistory}/>
             <Route exact path="/registryUser" component={RegistryUser}/>
             <Route exact path="/registryGame" component={RegistryGame}/>
+            <Route exact path="/recordGame" component={RecordGame}/>
             <Route component={NoMatch}/>
         </Switch>
     </div>

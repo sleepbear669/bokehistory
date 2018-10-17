@@ -3,10 +3,7 @@ import {connect} from 'react-redux'
 import {HashRouter as Router, Link} from 'react-router-dom'
 import {Provider} from 'react-redux'
 import {
-    AppBar,
-    Typography,
     Drawer,
-    Divider,
     List,
     ListItem,
     ListItemText, Select, MenuItem
@@ -19,6 +16,8 @@ import {
     createMuiTheme,
     withStyles
 } from '@material-ui/core/styles';
+
+import {fetchGames} from './../modules/app.modules.js';
 
 import BokeAppBar from './BokeAppBar';
 
@@ -54,46 +53,56 @@ const styles = theme => ({
 });
 
 class AppContainer extends Component {
+    state = {
+        game: 'all'
+    };
+
     componentDidMount() {
+        this.props.fetchGames();
     }
 
+    _onSelectGame = event => {
+        this.setState({ 'game': event.target.value });
+    };
     render() {
-        const {routes, store, classes, navigation} = this.props;
-
+        const {routes, store, classes, games} = this.props;
         return (
             <MuiThemeProvider theme={theme}>
                 <Provider store={store}>
                     <Router>
                         <div className={classes.root}>
-                            <BokeAppBar></BokeAppBar>
+                            <BokeAppBar
+                                title={this.state.game}
+                            />
                             <Drawer
                                 variant="permanent"
                                 classes={{
                                     paper: classes.drawerPaper,
                                 }}
                             >
-                                <Select>
-                                    <MenuItem value=""><em>None</em>
-                                    </MenuItem>
-                                    <MenuItem value={10}>마백마작</MenuItem>
-                                    <MenuItem value={20}>리치마작</MenuItem>
-                                    <MenuItem value={30}>Thirty</MenuItem>
+                                <Select
+                                    value={this.state.game}
+                                    onChange={this._onSelectGame}
+                                >
+                                    <MenuItem value={'all'}>모든 게임</MenuItem>
+                                    {
+                                        games.map(game => {
+                                            return <MenuItem value={game.name} key={game.name}>{game.name}</MenuItem>
+                                        })
+                                    }
                                 </Select>
                                 <List>
                                     <ListItem button>
-                                        <ListItemText primary='리치 마작'/>
-                                    </ListItem>
-                                    <ListItem button>
-                                        <ListItemText primary='마백마작'/>
-                                    </ListItem>
-                                    <ListItem button>
                                         <ListItemText primary='기록검색'/>
+                                    </ListItem>
+                                    <ListItem button component={Link} to="/recordGame">
+                                        <ListItemText primary='기록입력'/>
                                     </ListItem>
                                     <ListItem button>
                                         <ListItemText primary='후원입력'/>
                                     </ListItem>
                                     <ListItem button component="a" href="#simple-list">
-                                        <ListItemText  primary='이번의 상 현황'/>
+                                        <ListItemText primary='이번의 상 현황'/>
                                     </ListItem>
                                     <ListItem button component={Link} to="/registryUser">
                                         <ListItemText primary='사용자 등록'/>
@@ -117,4 +126,9 @@ class AppContainer extends Component {
 }
 
 const appContainer = withStyles(styles)(AppContainer);
-export default connect(state => ({}), {})(appContainer)
+export default connect(state => (
+        {
+            games: state.app.games
+        }
+    )
+    , {fetchGames})(appContainer)

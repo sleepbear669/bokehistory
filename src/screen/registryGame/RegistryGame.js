@@ -12,12 +12,6 @@ export default class RegistryGame extends PureComponent {
         error: false
     };
 
-    componentWillUnmount() {
-    }
-
-    componentDidMount() {
-    }
-
     _handleChange = name => event => {
         this.setState({
             [name]: event.target.value,
@@ -29,7 +23,6 @@ export default class RegistryGame extends PureComponent {
             .then(() => {
                 alert(`${this.state.name} 등록 완료`);
                 this.setState({name: '', error: false});
-                // this.props.history.push('/');
             })
             .catch(e => this.setState({error: true}));
     };
@@ -38,6 +31,7 @@ export default class RegistryGame extends PureComponent {
         return (
             <section className="game-history">
                 <p className={'warning'}>
+                    <span>실수로 등록한 경우 관리자에게 말해주세요.</span>
                 </p>
                 <TextField autoFocus
                            label='게임 이름'

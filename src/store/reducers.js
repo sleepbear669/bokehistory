@@ -1,9 +1,9 @@
+import app from './../modules/app.modules.js';
+
 import {combineReducers} from 'redux'
 
-export const makeRootReducer = () => {
-    return combineReducers({
+export const rootReducers = combineReducers({
+    app
+});
 
-    })
-};
-
-export default makeRootReducer
+export default rootReducers

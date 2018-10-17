@@ -7,7 +7,7 @@ const ACTION_HANDLERS = {
 
 export function addUser(name) {
     return async dispatch => {
-        const doc = await gameService.fetchUserByName(name);
+        const doc = await gameService.fetchGameByName(name);
         if (!doc.exists) {
             await gameService.addUser(name);
             dispatch({type: ADD_GAME})

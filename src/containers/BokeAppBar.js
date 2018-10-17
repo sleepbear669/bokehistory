@@ -21,13 +21,15 @@ const styles = theme => ({
 const BokeAppBar = (props) => {
 
     const {classes} = props;
+    let title = props.title;
+    if(title === 'all') title = '보드케이브';
 
     return (
         <AppBar position="fixed"
                 color="primary"
                 className={classes.appBar}>
             <Typography variant="title" color="inherit">
-                보드케이브
+                {title}
             </Typography>
         </AppBar>
     )
