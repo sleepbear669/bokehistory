@@ -1,3 +1,5 @@
+import gameService from './../../shared/services/gameService'
+
 const ACTION_HANDLERS = {
 };
 
