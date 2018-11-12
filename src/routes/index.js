@@ -4,11 +4,13 @@ import GameHistory from 'screen/gameHistory';
 import RegistryUser from 'screen/registryUser';
 import RegistryGame from 'screen/registryGame';
 import RecordGame from 'screen/recordGame';
+import BokeGameList from 'screen/bokeGameList';
 
 export const createRoutes = (store) => (
     <div style={{height: '100%'}}>
         <Switch>
-            <Route exact path="/" component={GameHistory}/>
+            <Route exact path="/" component={BokeGameList}/>
+            <Route exact path="/gameHistory" component={GameHistory}/>
             <Route exact path="/registryUser" component={RegistryUser}/>
             <Route exact path="/registryGame" component={RegistryGame}/>
             <Route exact path="/recordGame" component={RecordGame}/>

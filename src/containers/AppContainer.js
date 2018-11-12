@@ -39,14 +39,16 @@ const styles = theme => ({
     },
     drawerPaper: {
         position: 'relative',
+        height: 'calc(100vh - 48px)'
     },
     root: {
-        paddingTop: 48,
         flexGrow: 1,
         zIndex: 1,
         overflow: 'hidden',
         position: 'relative',
         display: 'flex',
+        height: '100vh',
+        flexWrap: 'wrap'
     },
     content: {
         flexGrow: 1,
@@ -59,7 +61,7 @@ const styles = theme => ({
 
 class AppContainer extends Component {
     state = {
-        game: 'all'
+        game: ''
     };
 
     componentDidMount() {
@@ -92,7 +94,7 @@ class AppContainer extends Component {
                                     onChange={this._onSelectGame}
                                 />
                                 <List>
-                                    <ListItem button  component={Link} to="/">
+                                    <ListItem button component={Link} to="/">
                                         <ListItemText primary='게임기록'/>
                                     </ListItem>
                                     <ListItem button>

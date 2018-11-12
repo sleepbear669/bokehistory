@@ -1,0 +1,11 @@
+.boke-game-list {
+  flex: 1;
+  display: flex;
+  flex-wrap: nowrap;
+
+  .game-card {
+    min-width: 200px;
+    margin: 10px;
+  }
+}
+

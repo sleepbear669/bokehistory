@@ -1,14 +1,7 @@
 import React from 'react'
-import {
-    AppBar,
-    Typography,
-    Select,
-    MenuItem
-} from "@material-ui/core";
+import {AppBar, Typography} from "@material-ui/core";
 
-import {
-    withStyles
-} from '@material-ui/core/styles';
+import {withStyles} from '@material-ui/core/styles';
 
 const styles = theme => ({
     appBar: {
@@ -21,15 +14,12 @@ const styles = theme => ({
 const BokeAppBar = (props) => {
 
     const {classes} = props;
-    let title = props.title;
-    if(title === 'all') title = '보드케이브';
-
     return (
-        <AppBar position="fixed"
+        <AppBar position="relative"
                 color="primary"
                 className={classes.appBar}>
             <Typography variant="title" color="inherit">
-                {title}
+                보드케이브 <span>{props.title}</span>
             </Typography>
         </AppBar>
     )
