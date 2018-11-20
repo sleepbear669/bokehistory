@@ -2,10 +2,11 @@ import './RecordGame.scss';
 
 import produce from "immer";
 import React, {PureComponent} from 'react';
-
+import {sortBy} from 'lodash';
 import {Button, IconButton, Input,} from '@material-ui/core';
 
 import {GameSelect} from 'components';
+import NormalRecord from './components/NormalRecord';
 
 const players = {
     1: {
@@ -28,7 +29,7 @@ const players = {
 
 export default class RecordGame extends PureComponent {
     state = {
-        game: 'all',
+        game: '',
         players,
         playerCount: Object.keys(players).length
 
@@ -44,38 +45,15 @@ export default class RecordGame extends PureComponent {
         });
     };
 
-    _inputPlayerRecord = (order, field) => {
-        return event => {
-            this.onProduce(draft => {
-                draft.players[order][field] = event.target.value;
-
-            });
-        };
-    };
-
-    _onSaveRecord = () => {
-        this.props.requestSaveRecord({
-            game: this.state.game,
-            players: this.state.players
-        })
-            .then( _ => alert('저장 완료'))
-    };
-
-    _addPlayer = () => {
-        this.onProduce(draft => {
-            draft.playerCount = this.state.playerCount + 1;
-            draft.players[draft.playerCount] = {
-                name: '',
-                score: 0
+    _onSaveRecord = (players) => {
+        const gameRecord = {
+                game: this.state.game,
+                players,
+                gameResult: sortBy(Object.values(players), (obj) => parseInt(obj.score)).reverse()
             }
-        });
-    };
-
-    _removePlayer = () => {
-        this.onProduce(draft => {
-            delete draft.players[draft.playerCount];
-            draft.playerCount = this.state.playerCount - 1;
-        });
+        ;
+        this.props.requestSaveRecord(gameRecord)
+            .then(_ => alert('저장 완료'))
     };
 
     render() {
@@ -88,40 +66,9 @@ export default class RecordGame extends PureComponent {
                     value={this.state.game}
                     onChange={this._onSelectGame}
                 />
-                {
-                    Object.keys(this.state.players)
-                        .map(order => {
-                            return (
-                                <div className="score-record-box"
-                                     key={order}
-                                >
-                                    <span>{order}</span>
-                                    <Input className='record-input' placeholder='닉네임'
-                                           onChange={this._inputPlayerRecord(order, 'name')}
-                                    />
-                                    <Input className='record-input' placeholder='점수'
-                                           onChange={this._inputPlayerRecord(order, 'score')}
-                                           type={'number'}
-                                    />
-                                </div>
-                            )
-                        })
-                }
-                <IconButton onClick={this._addPlayer}>
-                    <i className={'mdi mdi-plus'}/>
-                </IconButton>
-                <IconButton onClick={this._removePlayer}
-                            disabled={this.state.playerCount <= 1}
-                >
-                    <i className={'mdi mdi-minus'}/>
-                </IconButton>
-                <br/>
-                <Button variant="contained"
-                        color="primary"
-                        onClick={this._onSaveRecord}
-                >
-                    기록
-                </Button>
+                <NormalRecord
+                    onSave={this._onSaveRecord}
+                />
             </section>
         )
     }
