@@ -2,10 +2,6 @@ import fireStore from './../fireStore';
 
 const recordsCollection = fireStore.collection('records');
 
-function getTime() {
-    return (new Date()).getTime();
-}
-
 export default class recordService {
 
     static recordGame(record) {

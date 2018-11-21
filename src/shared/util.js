@@ -180,3 +180,7 @@ window.isChrome = function () {
     }
     return window._isChrome.isChrome;
 };
+
+window.getTime = function getTime() {
+    return (new Date()).getTime();
+};

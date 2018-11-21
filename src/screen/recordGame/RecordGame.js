@@ -58,7 +58,6 @@ export default class RecordGame extends PureComponent {
 
     render() {
         const {games} = this.props;
-
         return (
             <section className="recode-game">
                 <GameSelect

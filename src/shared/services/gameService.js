@@ -14,6 +14,13 @@ export default class gameService {
         });
     }
 
+    static recordGame(record) {
+        const currentTime = getTime();
+        record.createAt = currentTime;
+        return gamesCollection.doc(record.game).collection('records')
+            .doc(`${currentTime}:${record.gameResult[0].name}`).set(record);
+    }
+
     static fetchGameByName(name) {
         return gamesCollection.doc(name).get();
     }
