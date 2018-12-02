@@ -6,7 +6,7 @@ const GameSelect = (props) => {
     const {value, games, onChange} = props;
 
 
-    return <FormControl>
+    return <FormControl style={{minWidth: 120}}>
         <InputLabel>게임선택</InputLabel>
         <Select
             value={value}

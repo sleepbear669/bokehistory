@@ -25,7 +25,7 @@ export default class userService {
         const gameResult = record.gameResult;
         gameResult.map(r => {
             const ref = usersCollection.doc(r.name).collection('records')
-                .doc(`${currentTime}:${record.gameResult[0].name}`);
+                .doc(`${currentTime}:${record.game}`);
             batch.set(ref, record)
         });
         return batch.commit();
