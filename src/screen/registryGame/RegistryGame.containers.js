@@ -1,9 +1,9 @@
 import {connect} from 'react-redux';
 import RegistryGame from './RegistryGame';
-import {addUser} from "./RegistryGame.modules";
+import {addGame} from "./RegistryGame.modules";
 
 const mapDispatchToProps = {
-    addUser
+    addGame
 };
 
 const mapStateToProps = (state) => ({

@@ -19,7 +19,7 @@ export default class RegistryGame extends PureComponent {
     };
 
     _submit = () => {
-        this.props.addUser(this.state.name)
+        this.props.addGame(this.state.name)
             .then(() => {
                 alert(`${this.state.name} 등록 완료`);
                 this.setState({name: '', error: false});

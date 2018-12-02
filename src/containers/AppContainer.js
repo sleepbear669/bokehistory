@@ -51,10 +51,13 @@ const styles = theme => ({
         flexWrap: 'wrap'
     },
     content: {
+        display: 'flex',
+        flex: 1,
         flexGrow: 1,
         backgroundColor: theme.palette.background.default,
-        padding: theme.spacing.unit * 3,
         minWidth: 0, // So the Typography noWrap works
+        overflowY: 'scroll',
+        height: 'calc(100% - 48px)'
     },
     toolbar: theme.mixins.toolbar,
 });

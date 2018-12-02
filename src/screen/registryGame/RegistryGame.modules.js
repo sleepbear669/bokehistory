@@ -5,11 +5,11 @@ const ADD_GAME = 'ADD_GAME';
 const ACTION_HANDLERS = {
 };
 
-export function addUser(name) {
+export function addGame(name) {
     return async dispatch => {
         const doc = await gameService.fetchGameByName(name);
         if (!doc.exists) {
-            await gameService.addUser(name);
+            await gameService.addGame(name);
             dispatch({type: ADD_GAME})
         }else {
             throw '등록된 게임입니다.';

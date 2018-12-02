@@ -1,7 +1,7 @@
 .boke-game-list {
   flex: 1;
   display: flex;
-  flex-wrap: nowrap;
+  flex-wrap: wrap;
 
   .game-card {
     min-width: 200px;

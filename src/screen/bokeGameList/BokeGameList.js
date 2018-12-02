@@ -15,7 +15,7 @@ export default class BokeGameList extends PureComponent {
     };
 
     _generateGameCard = game => {
-        return <Card key={game.orginalName} className={'game-card'}>
+        return <Card key={game.name} className={'game-card'}>
             <CardHeader
                 title={game.name}
             />

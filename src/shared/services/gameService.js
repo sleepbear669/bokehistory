@@ -4,8 +4,8 @@ const gamesCollection = fireStore.collection('games');
 
 export default class gameService {
 
-    static addUser(name) {
-        return gamesCollection.doc(name).set({name, createdAt: new Date()});
+    static addGame(name) {
+        return gamesCollection.doc(name).set({name, createdAt: getTime()});
     }
 
     static fetchGames(callback = () => {}) {
