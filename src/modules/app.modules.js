@@ -9,8 +9,6 @@ export function fetchGames() {
         return gameService.fetchGames((games) => {
             if (Array.isArray(games)) {
                 dispatch({type: FETCH_GAMES, games})
-            } else {
-                dispatch({type: FETCH_GAMES, games: []});
             }
         });
     }

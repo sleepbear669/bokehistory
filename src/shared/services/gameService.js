@@ -8,7 +8,7 @@ export default class gameService {
         return gamesCollection.doc(name).set({name, createdAt: new Date()});
     }
 
-    static fetchGames(callback) {
+    static fetchGames(callback = () => {}) {
         return gamesCollection.onSnapshot((snapshot) => {
             callback(snapshot.docs.map(doc => doc.data()));
         });

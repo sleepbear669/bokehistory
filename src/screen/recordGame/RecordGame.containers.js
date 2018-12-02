@@ -1,13 +1,16 @@
 import {connect} from 'react-redux';
 import RecordGame from './RecordGame';
-import {requestSaveRecord} from "./RecordGame.modules";
+import {requestSaveRecord, fetchUser} from "./RecordGame.modules";
+import recordGame from "./RecordGame.modules";
 
 const mapDispatchToProps = {
-    requestSaveRecord
+    requestSaveRecord,
+    fetchUser
 };
 
 const mapStateToProps = (state) => ({
-    games: state.app.games
+    games: state.app.games,
+    users: state.recordGame.users
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(RecordGame)

@@ -7,6 +7,7 @@ import {Button, IconButton, Input,} from '@material-ui/core';
 
 import {GameSelect} from 'components';
 import NormalRecord from './components/NormalRecord';
+import {fetchUser} from "./RecordGame.modules";
 
 const players = {
     1: {
@@ -35,6 +36,10 @@ export default class RecordGame extends PureComponent {
 
     };
 
+    componentDidMount() {
+        this.props.fetchUser();
+    }
+
     onProduce = (producer) => {
         this.setState(produce(this.state, producer));
     };
@@ -46,6 +51,9 @@ export default class RecordGame extends PureComponent {
     };
 
     _onSaveRecord = (players) => {
+        if(this.state.game === '')
+            return alert('게임을 선택해주세요.');
+
         const gameRecord = {
                 game: this.state.game,
                 players,
@@ -57,7 +65,8 @@ export default class RecordGame extends PureComponent {
     };
 
     render() {
-        const {games} = this.props;
+        const {games,users} = this.props;
+        console.log(users);
         return (
             <section className="recode-game">
                 <GameSelect
@@ -66,6 +75,7 @@ export default class RecordGame extends PureComponent {
                     onChange={this._onSelectGame}
                 />
                 <NormalRecord
+                    users={users}
                     onSave={this._onSaveRecord}
                 />
             </section>

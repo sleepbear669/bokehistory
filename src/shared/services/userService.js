@@ -9,6 +9,11 @@ export default class userService {
         return usersCollection.doc(name).set({name, createdAt: getTime()});
     }
 
+    static fetchUser() {
+        return usersCollection.get()
+            .then(snapshot => snapshot.docs.map(doc => doc.data()));
+    }
+
     static fetchUserByName(name) {
         return usersCollection.doc(name).get();
     }
