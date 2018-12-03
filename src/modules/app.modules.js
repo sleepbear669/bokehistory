@@ -3,6 +3,7 @@ import produce from 'immer';
 import gameService from './../shared/services/gameService';
 
 export const FETCH_GAMES = 'FETCH_GAMES';
+export const SELECT_GAME = 'SELECT_GAME';
 
 export function fetchGames() {
     return (dispatch) => {
@@ -14,14 +15,22 @@ export function fetchGames() {
     }
 }
 
+export function selectGame(game) {
+    return {type: SELECT_GAME, game}
+}
+
 const ACTION_HANDLERS = {
     [FETCH_GAMES]: produce((draft, action) => {
         draft.games = action.games;
     }),
+    [SELECT_GAME]: produce((draft, action) => {
+        draft.game = action.game;
+    }),
 };
 
 const initialState = {
-    games: []
+    games: [],
+    game: ''
 };
 
 export default (state = initialState, action) => {
