@@ -3,11 +3,9 @@ import './RecordGame.scss';
 import produce from "immer";
 import React, {PureComponent} from 'react';
 import {sortBy} from 'lodash';
-import {Button, IconButton, Input,} from '@material-ui/core';
 
 import {GameSelect} from 'components';
 import NormalRecord from './components/NormalRecord';
-import {fetchUser} from "./RecordGame.modules";
 
 const players = {
     1: {
