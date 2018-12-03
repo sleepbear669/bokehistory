@@ -6,7 +6,6 @@ const mapDispatchToProps = {
     addUser
 };
 
-const mapStateToProps = (state) => ({
-});
+const mapStateToProps = (state) => ({});
 
 export default connect(mapStateToProps, mapDispatchToProps)(RegistryUser)

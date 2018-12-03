@@ -30,7 +30,7 @@ const players = {
 
 export default class RecordGame extends PureComponent {
     state = {
-        game: '',
+        game: this.props.game,
         players,
         playerCount: Object.keys(players).length
 
@@ -51,7 +51,7 @@ export default class RecordGame extends PureComponent {
     };
 
     _onSaveRecord = (players) => {
-        if(this.state.game === '')
+        if (this.state.game === '')
             return alert('게임을 선택해주세요.');
 
         const gameRecord = {
@@ -65,7 +65,7 @@ export default class RecordGame extends PureComponent {
     };
 
     render() {
-        const {games,users} = this.props;
+        const {games, users} = this.props;
         return (
             <section className="recode-game">
                 <GameSelect

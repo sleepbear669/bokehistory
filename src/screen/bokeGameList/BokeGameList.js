@@ -28,7 +28,7 @@ export default class BokeGameList extends PureComponent {
                 <Button component={Link} to="/gameHistory" size="small" color="primary" onClick={() => this.props.selectGame(game.name)}>
                     게임통계
                 </Button>
-                <Button component={Link} to="/recordGame" size="small" color="primary" onClick={() => this.props.selectGame(game.name)}>>
+                <Button component={Link} to="/recordGame" size="small" color="primary" onClick={() => this.props.selectGame(game.name)}>
                     점수기록
                 </Button>
             </CardActions>

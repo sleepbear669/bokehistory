@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import Select from 'react-select';
-import { withStyles } from '@material-ui/core/styles';
+import {withStyles} from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
 import NoSsr from '@material-ui/core/NoSsr';
 import TextField from '@material-ui/core/TextField';
@@ -10,43 +10,43 @@ import Paper from '@material-ui/core/Paper';
 import Chip from '@material-ui/core/Chip';
 import MenuItem from '@material-ui/core/MenuItem';
 import CancelIcon from '@material-ui/icons/Cancel';
-import { emphasize } from '@material-ui/core/styles/colorManipulator';
+import {emphasize} from '@material-ui/core/styles/colorManipulator';
 
 const suggestions = [
-    { label: 'Afghanistan' },
-    { label: 'Aland Islands' },
-    { label: 'Albania' },
-    { label: 'Algeria' },
-    { label: 'American Samoa' },
-    { label: 'Andorra' },
-    { label: 'Angola' },
-    { label: 'Anguilla' },
-    { label: 'Antarctica' },
-    { label: 'Antigua and Barbuda' },
-    { label: 'Argentina' },
-    { label: 'Armenia' },
-    { label: 'Aruba' },
-    { label: 'Australia' },
-    { label: 'Austria' },
-    { label: 'Azerbaijan' },
-    { label: 'Bahamas' },
-    { label: 'Bahrain' },
-    { label: 'Bangladesh' },
-    { label: 'Barbados' },
-    { label: 'Belarus' },
-    { label: 'Belgium' },
-    { label: 'Belize' },
-    { label: 'Benin' },
-    { label: 'Bermuda' },
-    { label: 'Bhutan' },
-    { label: 'Bolivia, Plurinational State of' },
-    { label: 'Bonaire, Sint Eustatius and Saba' },
-    { label: 'Bosnia and Herzegovina' },
-    { label: 'Botswana' },
-    { label: 'Bouvet Island' },
-    { label: 'Brazil' },
-    { label: 'British Indian Ocean Territory' },
-    { label: 'Brunei Darussalam' },
+    {label: 'Afghanistan'},
+    {label: 'Aland Islands'},
+    {label: 'Albania'},
+    {label: 'Algeria'},
+    {label: 'American Samoa'},
+    {label: 'Andorra'},
+    {label: 'Angola'},
+    {label: 'Anguilla'},
+    {label: 'Antarctica'},
+    {label: 'Antigua and Barbuda'},
+    {label: 'Argentina'},
+    {label: 'Armenia'},
+    {label: 'Aruba'},
+    {label: 'Australia'},
+    {label: 'Austria'},
+    {label: 'Azerbaijan'},
+    {label: 'Bahamas'},
+    {label: 'Bahrain'},
+    {label: 'Bangladesh'},
+    {label: 'Barbados'},
+    {label: 'Belarus'},
+    {label: 'Belgium'},
+    {label: 'Belize'},
+    {label: 'Benin'},
+    {label: 'Bermuda'},
+    {label: 'Bhutan'},
+    {label: 'Bolivia, Plurinational State of'},
+    {label: 'Bonaire, Sint Eustatius and Saba'},
+    {label: 'Bosnia and Herzegovina'},
+    {label: 'Botswana'},
+    {label: 'Bouvet Island'},
+    {label: 'Brazil'},
+    {label: 'British Indian Ocean Territory'},
+    {label: 'Brunei Darussalam'},
 ].map(suggestion => ({
     value: suggestion.label,
     label: suggestion.label,
@@ -111,7 +111,7 @@ function NoOptionsMessage(props) {
     );
 }
 
-function inputComponent({ inputRef, ...props }) {
+function inputComponent({inputRef, ...props}) {
     return <div ref={inputRef} {...props} />;
 }
 
@@ -219,7 +219,7 @@ class IntegrationReactSelect extends React.Component {
     };
 
     render() {
-        const { classes, theme } = this.props;
+        const {classes, theme} = this.props;
 
         const selectStyles = {
             input: base => ({
@@ -243,7 +243,7 @@ class IntegrationReactSelect extends React.Component {
                         onChange={this.handleChange('single')}
                         placeholder="Search a country (start with a)"
                     />
-                    <div className={classes.divider} />
+                    <div className={classes.divider}/>
                     <Select
                         classes={classes}
                         styles={selectStyles}
@@ -271,4 +271,4 @@ IntegrationReactSelect.propTypes = {
     theme: PropTypes.object.isRequired,
 };
 
-export default withStyles(styles, { withTheme: true })(IntegrationReactSelect);
+export default withStyles(styles, {withTheme: true})(IntegrationReactSelect);

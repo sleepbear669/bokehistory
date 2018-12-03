@@ -1,4 +1,5 @@
 import ImageSizeResolver from "./ImageSizeResolver";
+
 export default class ImageUrlResolver {
 
     static canUseWebP = false;
@@ -69,7 +70,6 @@ export default class ImageUrlResolver {
                 }
             }
         }
-
 
 
     }

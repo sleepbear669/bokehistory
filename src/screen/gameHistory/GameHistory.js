@@ -22,14 +22,14 @@ export default class GameHistory extends PureComponent {
                 ...players[order],
                 order
             }));
-        playerList.sort((a,b) => {
+        playerList.sort((a, b) => {
             return a.score - b.score;
         });
         return <Card key={Math.random()}
-                    className={'history-card'}
+                     className={'history-card'}
         >
             <CardContent>
-                <Typography variant="h5" component="h2" >
+                <Typography variant="h5" component="h2">
                     {record.game}
                 </Typography>
                 {

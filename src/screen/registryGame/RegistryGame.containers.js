@@ -6,7 +6,6 @@ const mapDispatchToProps = {
     addGame
 };
 
-const mapStateToProps = (state) => ({
-});
+const mapStateToProps = (state) => ({});
 
 export default connect(mapStateToProps, mapDispatchToProps)(RegistryGame)

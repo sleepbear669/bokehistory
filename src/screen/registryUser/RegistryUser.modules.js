@@ -3,7 +3,8 @@ import userService from './../../shared/services/userService';
 const ADD_USER = 'ADD_USER';
 
 const ACTION_HANDLERS = {
-    [ADD_USER]: () => {}
+    [ADD_USER]: () => {
+    }
 };
 
 export function addUser(name) {
@@ -12,7 +13,7 @@ export function addUser(name) {
         if (!doc.exists) {
             await userService.addUser(name);
             dispatch({type: ADD_USER})
-        }else {
+        } else {
             throw '등록된 이름입니다.';
         }
     }

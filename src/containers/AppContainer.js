@@ -1,6 +1,6 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
-import {HashRouter as Router, Link} from 'react-router-dom'
+import {HashRouter as Router, Link, Redirect} from 'react-router-dom'
 import {Provider} from 'react-redux'
 import {
     Drawer,
@@ -55,7 +55,7 @@ const styles = theme => ({
         flex: 1,
         flexGrow: 1,
         backgroundColor: theme.palette.background.default,
-        minWidth: 0, // So the Typography noWrap works
+        minWidth: 300, // So the Typography noWrap works
         overflowY: 'scroll',
         height: 'calc(100% - 48px)'
     },
@@ -69,7 +69,7 @@ class AppContainer extends Component {
     }
 
     _onSelectGame = event => {
-        this.porps.selectGame(event.target.value);
+        this.props.selectGame(event.target.value);
     };
 
     render() {
@@ -82,9 +82,8 @@ class AppContainer extends Component {
                             <BokeAppBar
                                 title={game}
                             />
-
                             {
-
+                                game !== '' &&
                                 <Drawer
                                     open={false}
                                     variant="permanent"
@@ -98,9 +97,6 @@ class AppContainer extends Component {
                                         onChange={this._onSelectGame}
                                     />
                                     <List>
-                                        <ListItem button component={Link} to="/">
-                                            <ListItemText primary='게임기록'/>
-                                        </ListItem>
                                         <ListItem button component={Link} to="/gameHistory">
                                             <ListItemText primary='기록통계'/>
                                         </ListItem>
@@ -123,7 +119,9 @@ class AppContainer extends Component {
                                 </Drawer>
                             }
                             <div className={classes.content}>
-                                {routes}
+                                {
+                                    game === '' && location.hash !== '#/' ? <Redirect to="/"/> : routes
+                                }
                             </div>
 
                         </div>

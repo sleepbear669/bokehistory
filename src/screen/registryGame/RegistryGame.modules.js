@@ -2,8 +2,7 @@ import gameService from './../../shared/services/gameService';
 
 const ADD_GAME = 'ADD_GAME';
 
-const ACTION_HANDLERS = {
-};
+const ACTION_HANDLERS = {};
 
 export function addGame(name) {
     return async dispatch => {
@@ -11,7 +10,7 @@ export function addGame(name) {
         if (!doc.exists) {
             await gameService.addGame(name);
             dispatch({type: ADD_GAME})
-        }else {
+        } else {
             throw '등록된 게임입니다.';
         }
     }
