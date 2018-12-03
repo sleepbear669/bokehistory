@@ -12,7 +12,7 @@ export default class GameHistory extends PureComponent {
     }
 
     componentDidMount() {
-        this.props.fetchRecord();
+        this.props.fetchRecord(this.props.game);
     }
 
     generateRecordCard = (record) => {
@@ -49,6 +49,7 @@ export default class GameHistory extends PureComponent {
 
     render() {
         const {records} = this.props;
+        console.log(records);
         return (
             <section className="game-history">
                 <div className="history-container">

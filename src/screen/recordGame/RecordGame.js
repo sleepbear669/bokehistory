@@ -61,7 +61,10 @@ export default class RecordGame extends PureComponent {
             }
         ;
         this.props.requestSaveRecord(gameRecord)
-            .then(_ => alert('저장 완료'))
+            .then(_ => {
+                alert('저장 완료');
+                this.props.selectGame(this.state.game);
+            })
     };
 
     render() {

@@ -7,6 +7,7 @@ const mapDispatchToProps = {
 };
 
 const mapStateToProps = (state) => ({
+    game: state.app.game,
     records: state.gameHistory.records
 });
 

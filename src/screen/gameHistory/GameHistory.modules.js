@@ -1,6 +1,6 @@
 import produce from 'immer';
 
-import recordService from 'shared/services/recordService';
+import gameService from "../../shared/services/gameService";
 
 const FETCH_RECORD = 'FETCH_RECORD';
 
@@ -10,11 +10,9 @@ const ACTION_HANDLERS = {
     })
 };
 
-export function fetchRecord() {
+export function fetchRecord(gameName) {
     return async dispatch => {
-        const recordsSnapshot = await recordService.fetchGameRecord();
-        const records = recordsSnapshot.docs
-            .map(doc => doc.data());
+        const records = await gameService.fetchRecordByGame(gameName);
         dispatch({type: FETCH_RECORD, records});
     }
 }

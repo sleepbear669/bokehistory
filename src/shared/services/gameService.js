@@ -25,4 +25,9 @@ export default class gameService {
     static fetchGameByName(name) {
         return gamesCollection.doc(name).get();
     }
+
+    static fetchRecordByGame(name) {
+        return gamesCollection.doc(name).collection('records').get()
+            .then(snapshot => snapshot.docs.map(doc => doc.data()));
+    }
 }
