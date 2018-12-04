@@ -14,23 +14,12 @@
         "lint:fix": "npm run lint -- --fix",
         "prestart": "yarn",
         "start": "better-npm-run start",
-        "start:prod": "better-npm-run start:prod",
         "dev": "better-npm-run dev",
-        "dev:staging": "better-npm-run dev:staging",
         "tdd": "./node_modules/.bin/jest test/ --watchAll",
         "test": "./node_modules/.bin/jest test/",
         "coverage": "./node_modules/.bin/jest --coverage",
-        "deploy": "better-npm-run deploy",
-        "deploy:dev": "better-npm-run deploy:dev",
-        "deploy:prod": "better-npm-run deploy:prod",
         "prebuild": "yarn",
-        "build:local": "better-npm-run build",
-        "prebuild:staging": "yarn",
-        "build:staging": "better-npm-run build:staging",
-        "prebuild:prod": "yarn",
-        "build:prod": "better-npm-run build:prod",
-        "prebuild:render": "yarn",
-        "build:render": "better-npm-run build:render",
+        "build": "better-npm-run build && push-dir --dir=dist --branch=gh-pages --cleanup",
         "codecov": "cat coverage/*/lcov.info | codecov"
     },
     "betterScripts": {
@@ -47,41 +36,6 @@
                 "DEBUG": "app:*"
             }
         },
-        "dev:staging": {
-            "command": "nodemon bin/dev-server --ignore dist --ignore coverage --ignore tests --ignore src",
-            "env": {
-                "NODE_ENV": "development",
-                "DEBUG": "app:*",
-                "SERVICE": "staging"
-            }
-        },
-        "build:render": {
-            "command": "npm run clean && npm run compile",
-            "env": {
-                "NODE_ENV": "renderer",
-                "DEBUG": "app:*"
-            }
-        },
-        "deploy": {
-            "command": "npm run lint && npm run test && npm run clean && npm run compile",
-            "env": {
-                "DEBUG": "app:*"
-            }
-        },
-        "deploy:dev": {
-            "command": "npm run deploy",
-            "env": {
-                "NODE_ENV": "development",
-                "DEBUG": "app:*"
-            }
-        },
-        "deploy:prod": {
-            "command": "npm run deploy",
-            "env": {
-                "NODE_ENV": "production",
-                "DEBUG": "app:*"
-            }
-        },
         "build": {
             "command": "npm run clean && npm run compile",
             "env": {
@@ -89,33 +43,10 @@
                 "DEBUG": "app:*"
             }
         },
-        "build:staging": {
-            "command": "npm run clean && npm run compile",
-            "env": {
-                "NODE_ENV": "production",
-                "DEBUG": "app:*",
-                "SERVICE": "staging"
-            }
-        },
-        "build:prod": {
-            "command": "npm run clean && npm run compile",
-            "env": {
-                "NODE_ENV": "production",
-                "DEBUG": "app:*",
-                "SERVICE": "prod"
-            }
-        },
         "start": {
             "command": "node --max-old-space-size=4096 bin/dev-server",
             "env": {
                 "DEBUG": "app:*"
-            }
-        },
-        "start:prod": {
-            "command": "node --max-old-space-size=4096 bin/dev-server",
-            "env": {
-                "DEBUG": "app:*",
-                "SERVICE": "prod"
             }
         },
         "test": {
@@ -228,6 +159,7 @@
         "eslint-plugin-standard": "^4.0.0",
         "express": "^4.16.3",
         "fast-sass-loader": "^1.4.6",
+        "gh-pages": "^2.0.1",
         "jest": "^23.6.0",
         "karma": "^3.0.0",
         "karma-coverage": "^1.1.2",
