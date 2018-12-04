@@ -53,11 +53,10 @@ export default class RecordGame extends PureComponent {
             return alert('게임을 선택해주세요.');
 
         const gameRecord = {
-                game: this.state.game,
-                players,
-                gameResult: sortBy(Object.values(players), (obj) => parseInt(obj.score)).reverse()
-            }
-        ;
+            game: this.state.game,
+            players,
+            gameResult: sortBy(Object.values(players), (obj) => parseInt(obj.score)).reverse().map((r, i) => ({...r, rank: i + 1}))
+        };
         this.props.requestSaveRecord(gameRecord)
             .then(_ => {
                 alert('저장 완료');

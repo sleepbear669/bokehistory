@@ -7,18 +7,28 @@ const FETCH_RECORD = 'FETCH_RECORD';
 const ACTION_HANDLERS = {
     [FETCH_RECORD]: produce((draft, action) => {
         draft.records = action.records;
+
+        draft.gameResult = action.gameResult.reduce((a, b) => {
+            if (!a.hasOwnProperty(b.name)) {
+                a[b.name] = [];
+            }
+            a[b.name].push(b);
+            return a;
+        }, {});
     })
 };
 
 export function fetchRecord(gameName) {
     return async dispatch => {
         const records = await gameService.fetchRecordByGame(gameName);
-        dispatch({type: FETCH_RECORD, records});
+        const gameResult = records.reduce((a, b) => a.concat(b.gameResult), []);
+        dispatch({type: FETCH_RECORD, records, gameResult});
     }
 }
 
 const initialState = {
-    records: []
+    records: [],
+    gameResult: null
 };
 
 export default (state = initialState, action) => {
