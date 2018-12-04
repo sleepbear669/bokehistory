@@ -30,7 +30,7 @@ const ACTION_HANDLERS = {
 
 const initialState = {
     games: [],
-    game: '가이아프로젝트'
+    game: ''
 };
 
 export default (state = initialState, action) => {
