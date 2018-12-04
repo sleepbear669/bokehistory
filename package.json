@@ -95,6 +95,7 @@
         "normalize.css": "^8.0.0",
         "postcss-loader": "^3.0.0",
         "prop-types": "^15.6.2",
+        "push-dir": "^0.4.1",
         "query-string": "^6.1.0",
         "react": "16.5.2",
         "react-addons-shallow-compare": "^15.6.2",
