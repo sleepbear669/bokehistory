@@ -35,7 +35,7 @@ const webpackConfig = {
         splitChunks: {
             chunks: "all"
         }
-    }
+    },
 };
 // ------------------------------------
 // Entry Points
