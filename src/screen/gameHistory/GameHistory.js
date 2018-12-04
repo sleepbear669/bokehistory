@@ -58,7 +58,7 @@ export default class GameHistory extends PureComponent {
         const {records} = this.props;
         console.log(records);
         return (
-            <Paper className="game-history">
+            <section className="game-history">
                 <Table>
                     <TableHead>
                         <TableRow>
@@ -91,7 +91,7 @@ export default class GameHistory extends PureComponent {
                     }
                 </div>
 
-            </Paper>
+            </section>
         );
     }
 };
