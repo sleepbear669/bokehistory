@@ -1,11 +1,14 @@
-import fireStore from './../fireStore';
+import fireStore, {storage} from './../fireStore';
 
 const gamesCollection = fireStore.collection('games');
-
+const storageRef = storage.ref();
 export default class gameService {
 
-    static addGame(name) {
-        return gamesCollection.doc(name).set({name, createdAt: getTime()});
+    static addGame(gameInfo, thumbnail) {
+        const extention = thumbnail.name.split('.').pop();
+        storageRef.child(`${gameInfo.originalName}.${extention}`).put(thumbnail);
+
+        return gamesCollection.doc(gameInfo.name).set({...gameInfo, createdAt: getTime()});
     }
 
     static fetchGames(callback = () => {

@@ -3,12 +3,23 @@ import './RegistryGame.scss';
 import {
     TextField,
     Button,
+    Input,
     FormLabel
 } from '@material-ui/core';
+
+const styles = {
+    input: {
+        display: 'none',
+    },
+};
 
 export default class RegistryGame extends PureComponent {
     state = {
         name: '',
+        originalName: '',
+        min: 2,
+        max: 4,
+        thumbnail: null,
         error: false
     };
 
@@ -18,13 +29,21 @@ export default class RegistryGame extends PureComponent {
         });
     };
 
+    _uploadFile = e => {
+        this.setState({thumbnail: e.target.files[0]});
+    };
+
     _submit = () => {
-        this.props.addGame(this.state.name)
+        const {name, originalName, min, max, thumbnail} = this.state;
+        this.props.addGame({name, originalName, min, max}, thumbnail)
             .then(() => {
                 alert(`${this.state.name} 등록 완료`);
                 this.setState({name: '', error: false});
             })
-            .catch(e => this.setState({error: true}));
+            .catch(e => {
+                console.log(e);
+                this.setState({error: true})
+            });
     };
 
     render() {
@@ -39,6 +58,38 @@ export default class RegistryGame extends PureComponent {
                            onChange={this._handleChange('name')}
                            error={this.state.error}
                 />
+                <br/>
+
+                <TextField label='영문 이름'
+                           value={this.state.originalName}
+                           onChange={this._handleChange('originalName')}
+                />
+                <br/>
+
+                <Input type={'number'}
+                       value={this.state.min}
+                       onChange={this._handleChange('min')}
+                />
+                <Input type={'number'}
+                       value={this.state.max}
+                       onChange={this._handleChange('max')}
+                />
+                <br/>
+                <input
+                    accept="image/*"
+                    style={styles.input}
+                    id="contained-button-file"
+                    onChange={this._uploadFile}
+                    multiple
+                    type="file"
+                />
+                <label htmlFor="contained-button-file">
+                    <Button variant="contained" component="span">
+                        Upload
+                    </Button>
+                    {this.state.thumbnail && this.state.thumbnail.name}
+                </label>
+
                 <br/>
                 {
                     this.state.error &&
