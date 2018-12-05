@@ -7,10 +7,7 @@ const ACTION_HANDLERS = {};
 export function addGame(gameInfo, thumbnail) {
     return async dispatch => {
         const doc = await gameService.fetchGameByName(gameInfo.name);
-        console.log(gameInfo);
-        console.log(doc.exists);
         if (!doc.exists) {
-            console.log(doc.exists);
             await gameService.addGame(gameInfo, thumbnail);
             dispatch({type: ADD_GAME})
         } else {

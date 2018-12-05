@@ -4,13 +4,26 @@ import {
     TextField,
     Button,
     Input,
-    FormLabel
+    FormLabel,
+    FormControl
 } from '@material-ui/core';
 
 const styles = {
     input: {
         display: 'none',
     },
+    textField: {
+        margin: 5
+    },
+    personForm: {
+        display: 'flex',
+        flexDirection: 'row',
+        alignItems: 'center'
+    },
+    personInput: {
+        width: 30,
+
+    }
 };
 
 export default class RegistryGame extends PureComponent {
@@ -57,23 +70,32 @@ export default class RegistryGame extends PureComponent {
                            value={this.state.name}
                            onChange={this._handleChange('name')}
                            error={this.state.error}
+                           style={styles.textField}
                 />
                 <br/>
 
                 <TextField label='영문 이름'
                            value={this.state.originalName}
                            onChange={this._handleChange('originalName')}
+                           style={styles.textField}
                 />
                 <br/>
+                <FormControl style={styles.personForm}>
+                    게임 인원 :
+                    <Input type={'number'}
+                           value={this.state.min}
+                           onChange={this._handleChange('min')}
+                           style={styles.personInput}
+                           input={{textAlign: 'center'}}
+                    />
+                    ~
+                    <Input type={'number'}
+                           value={this.state.max}
+                           onChange={this._handleChange('max')}
+                           style={styles.personInput}
+                    />
+                </FormControl>
 
-                <Input type={'number'}
-                       value={this.state.min}
-                       onChange={this._handleChange('min')}
-                />
-                <Input type={'number'}
-                       value={this.state.max}
-                       onChange={this._handleChange('max')}
-                />
                 <br/>
                 <input
                     accept="image/*"

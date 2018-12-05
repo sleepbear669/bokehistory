@@ -4,15 +4,14 @@ const gamesCollection = fireStore.collection('games');
 const storageRef = storage.ref();
 export default class gameService {
 
-    static addGame(gameInfo, thumbnail) {
-        const extention = thumbnail.name.split('.').pop();
-        storageRef.child(`${gameInfo.originalName}.${extention}`).put(thumbnail);
-
-        return gamesCollection.doc(gameInfo.name).set({...gameInfo, createdAt: getTime()});
+    static async addGame(gameInfo, thumbnail) {
+        const extension = thumbnail.name.split('.').pop();
+        const snapshot = await storageRef.child(`${gameInfo.originalName}.${extension}`).put(thumbnail);
+        const url = await snapshot.ref.getDownloadURL();
+        gamesCollection.doc(gameInfo.originalName).set({...gameInfo, thumbnail: url, createdAt: getTime()});
     }
 
-    static fetchGames(callback = () => {
-    }) {
+    static fetchGames(callback = () => {}) {
         return gamesCollection.onSnapshot((snapshot) => {
             callback(snapshot.docs.map(doc => doc.data()));
         });

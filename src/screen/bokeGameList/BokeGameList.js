@@ -21,8 +21,7 @@ export default class BokeGameList extends PureComponent {
             />
             <CardMedia
                 component="img"
-                image={`/assets/images/${game.originalName}.jpg`}
-
+                src={game.thumbnail}
             />
             <CardActions>
                 <Button component={Link} to="/gameHistory" size="small" color="primary" onClick={() => this.props.selectGame(game.name)}>
