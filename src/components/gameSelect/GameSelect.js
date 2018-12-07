@@ -14,7 +14,7 @@ const GameSelect = (props) => {
         >
             {
                 games.map(game => {
-                    return <MenuItem value={game.name} key={game.name}>{game.name}</MenuItem>
+                    return <MenuItem value={game.originalName} key={game.name}>{game.name}</MenuItem>
                 })
             }
         </Select>

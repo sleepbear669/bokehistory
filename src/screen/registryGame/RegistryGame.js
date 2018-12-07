@@ -5,8 +5,11 @@ import {
     Button,
     Input,
     FormLabel,
-    FormControl
+    FormControl,
+    FormControlLabel,
+    Radio
 } from '@material-ui/core';
+import Checkbox from "@material-ui/core/es/Checkbox/Checkbox";
 
 const styles = {
     input: {
@@ -32,9 +35,18 @@ export default class RegistryGame extends PureComponent {
         originalName: '',
         min: 2,
         max: 4,
+        bid: false,
+        clan: false,
         thumbnail: null,
         error: false
     };
+
+    _checkBoxChange = name => event => {
+        this.setState({
+            [name]: event.target.checked,
+        });
+    };
+
 
     _handleChange = name => event => {
         this.setState({
@@ -47,8 +59,11 @@ export default class RegistryGame extends PureComponent {
     };
 
     _submit = () => {
-        const {name, originalName, min, max, thumbnail} = this.state;
-        this.props.addGame({name, originalName, min, max}, thumbnail)
+        const {name, originalName, min, max, bid, clan, thumbnail} = this.state;
+        if (thumbnail === null) {
+            return alert('이미지를 등록해주세요');
+        }
+        this.props.addGame({name, originalName, min, max, bid, clan}, thumbnail)
             .then(() => {
                 alert(`${this.state.name} 등록 완료`);
                 this.setState({name: '', error: false});
@@ -95,6 +110,26 @@ export default class RegistryGame extends PureComponent {
                            style={styles.personInput}
                     />
                 </FormControl>
+                <FormControlLabel
+                    control={
+                        <Checkbox
+                            checked={this.state.bid}
+                            onChange={this._checkBoxChange('bid')}
+                            color="primary"
+                        />
+                    }
+                    label="비딩"
+                />
+                <FormControlLabel
+                    control={
+                        <Checkbox
+                            checked={this.state.clan}
+                            onChange={this._checkBoxChange('clan')}
+                            color="primary"
+                        />
+                    }
+                    label="종족 사용"
+                />
 
                 <br/>
                 <input

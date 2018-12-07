@@ -11,10 +11,12 @@ export default class gameService {
         gamesCollection.doc(gameInfo.originalName).set({...gameInfo, thumbnail: url, createdAt: getTime()});
     }
 
-    static fetchGames(callback = () => {}) {
-        return gamesCollection.onSnapshot((snapshot) => {
-            callback(snapshot.docs.map(doc => doc.data()));
-        });
+    static fetchGames() {
+        return gamesCollection.get().then(snapshot => snapshot.docs.map(doc => doc.data()));
+    };
+
+    static updateClan(gameName, clans) {
+        return gamesCollection.doc(gameName).update({clans})
     }
 
     static recordGame(record) {

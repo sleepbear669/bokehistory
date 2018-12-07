@@ -15,7 +15,7 @@ export default class BokeGameList extends PureComponent {
     };
 
     _generateGameCard = game => {
-        return <Card key={game.name} className={'game-card'}>
+        return <Card key={game.originalName} className={'game-card'}>
             <CardHeader
                 title={game.name}
             />
@@ -24,10 +24,10 @@ export default class BokeGameList extends PureComponent {
                 src={game.thumbnail}
             />
             <CardActions>
-                <Button component={Link} to="/gameHistory" size="small" color="primary" onClick={() => this.props.selectGame(game.name)}>
+                <Button component={Link} to="/gameHistory" size="small" color="primary" onClick={() => this.props.selectGame(game.originalName)}>
                     게임통계
                 </Button>
-                <Button component={Link} to="/recordGame" size="small" color="primary" onClick={() => this.props.selectGame(game.name)}>
+                <Button component={Link} to="/recordGame" size="small" color="primary" onClick={() => this.props.selectGame(game.originalName)}>
                     점수기록
                 </Button>
             </CardActions>

@@ -6,6 +6,7 @@ import {sortBy} from 'lodash';
 
 import {GameSelect} from 'components';
 import NormalRecord from './components/NormalRecord';
+import ClanRecord from './components/ClanRecord';
 
 const players = {
     1: {
@@ -49,13 +50,12 @@ export default class RecordGame extends PureComponent {
     };
 
     _onSaveRecord = (players) => {
-        if (this.state.game === '')
-            return alert('게임을 선택해주세요.');
 
         const gameRecord = {
-            game: this.state.game,
+            game: this.state.game.originalName,
             players,
-            gameResult: sortBy(Object.values(players), (obj) => parseInt(obj.score)).reverse().map((r, i) => ({...r, rank: i + 1}))
+            gameResult: sortBy(Object.values(players), (obj) => parseInt(obj.score)).reverse()
+                .map((r, i) => ({...r, rank: i + 1}))
         };
         this.props.requestSaveRecord(gameRecord)
             .then(_ => {
@@ -63,16 +63,36 @@ export default class RecordGame extends PureComponent {
                 this.props.selectGame(this.state.game);
             })
     };
+    _generateRecord = (game) => {
+        const {users} = this.props;
+        console.log(game);
+        if (game.clan) {
+            return <ClanRecord
+                clans={game.clans}
+                bid={game.bid}
+                users={users}
+                onSave={this._onSaveRecord}
+            />
+        }
+        return <NormalRecord
+            users={users}
+            onSave={this._onSaveRecord}
+        />
+    };
 
     render() {
         const {games, users} = this.props;
+
         return (
             <section className="recode-game">
                 <GameSelect
                     games={games}
-                    value={this.state.game}
+                    value={this.state.game.originalName}
                     onChange={this._onSelectGame}
                 />
+                {
+                    this.state.game && this._generateRecord(this.state.game)
+                }
                 <NormalRecord
                     users={users}
                     onSave={this._onSaveRecord}

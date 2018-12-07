@@ -83,7 +83,7 @@ class AppContainer extends Component {
                                 title={game}
                             />
                             {
-                                game !== '' &&
+                                game !== null &&
                                 <Drawer
                                     open={false}
                                     variant="permanent"
@@ -93,7 +93,7 @@ class AppContainer extends Component {
                                 >
                                     <GameSelect
                                         games={games}
-                                        value={game}
+                                        value={game.originalName}
                                         onChange={this._onSelectGame}
                                     />
                                     <List>
@@ -120,7 +120,7 @@ class AppContainer extends Component {
                             }
                             <div className={classes.content}>
                                 {
-                                    game === '' && location.hash !== '#/' ? <Redirect to="/"/> : routes
+                                    game === null && location.hash !== '#/' ? <Redirect to="/"/> : routes
                                 }
                             </div>
 
