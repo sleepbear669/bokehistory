@@ -10,13 +10,6 @@ import TableRow from '@material-ui/core/TableRow';
 import TableSortLabel from '@material-ui/core/TableSortLabel';
 import Paper from '@material-ui/core/Paper';
 
-let counter = 0;
-
-function createData(name, calories, fat, carbs, protein) {
-    counter += 1;
-    return {id: counter, name, calories, fat, carbs, protein};
-}
-
 function desc(a, b, orderBy) {
     if (b[orderBy] < a[orderBy]) {
         return -1;
@@ -41,14 +34,6 @@ function getSorting(order, orderBy) {
     return order === 'desc' ? (a, b) => desc(a, b, orderBy) : (a, b) => -desc(a, b, orderBy);
 }
 
-const rows = [
-    {id: 'name', numeric: false, disablePadding: true, label: 'Dessert (100g serving)'},
-    {id: 'calories', numeric: true, disablePadding: false, label: 'Calories'},
-    {id: 'fat', numeric: true, disablePadding: false, label: 'Fat (g)'},
-    {id: 'carbs', numeric: true, disablePadding: false, label: 'Carbs (g)'},
-    {id: 'protein', numeric: true, disablePadding: false, label: 'Protein (g)'},
-];
-
 const historyRows = [
     {id: 'average', numeric: true, disablePadding: false, label: '평균'},
     {id: 'winRate', numeric: true, disablePadding: false, label: '승률'},
@@ -69,10 +54,10 @@ class EnhancedTableHead extends React.Component {
                 <TableRow>
                     <TableCell padding='none'>순위</TableCell>
                     <TableCell padding='none'>이름</TableCell>
-                    {historyRows.map(row => {
+                    {historyRows.map((row,i) => {
                         return (
                             <TableCell
-                                key={row.name}
+                                key={i}
                                 numeric={row.numeric}
                                 padding={row.disablePadding ? 'none' : 'default'}
                                 sortDirection={orderBy === row.id ? order : false}
@@ -116,7 +101,7 @@ class GameHistory extends React.Component {
     };
 
     componentDidMount() {
-        this.props.fetchRecord(this.props.game);
+        this.props.fetchRecord(this.props.game.originalName);
     }
 
     componentDidUpdate(prevProps, prevState, snapshots) {
@@ -169,7 +154,7 @@ class GameHistory extends React.Component {
                                     return (
                                         <TableRow
                                             hover
-                                            key={n.id}
+                                            key={i}
                                         >
                                             <TableCell component="th" scope="row" padding="none">
                                                 {i + 1}
