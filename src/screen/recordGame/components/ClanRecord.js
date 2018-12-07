@@ -1,28 +1,50 @@
 import React, {PureComponent} from 'react';
 import PropTypes from 'prop-types';
 import produce from "immer";
-import {MenuItem, Input, Select, FormControl, InputLabel, Button, IconButton} from "@material-ui/core";
+import {MenuItem, Input, Select, FormControl, InputLabel, Button, IconButton, TextField, Paper} from "@material-ui/core";
+import {withStyles} from '@material-ui/core/styles';
+import {Link} from "react-router-dom";
+
+const styles = theme => ({
+    button: {
+        margin: theme.spacing.unit,
+    },
+    paper: {
+        padding: theme.spacing.unit,
+        margin: theme.spacing.unit
+    },
+    textField: {
+        marginLeft: theme.spacing.unit,
+        marginRight: theme.spacing.unit,
+        minWidth: 100,
+        maxWidth: 200,
+    }
+});
 
 const players = {
     1: {
         name: '',
         clan: '',
-        score: 0
+        score: 0,
+        bid: 0
     },
     2: {
         name: '',
         clan: '',
-        score: 0
+        score: 0,
+        bid: 0
     },
     3: {
         name: '',
         clan: '',
-        score: 0
+        score: 0,
+        bid: 0
     },
     4: {
         name: '',
         clan: '',
-        score: 0
+        score: 0,
+        bid: 0
     }
 };
 
@@ -66,11 +88,10 @@ class ClanRecord extends PureComponent {
         this.props.onSave(this.state.players);
     };
 
-    _renderSelect = (order, title, data, type) => {
-        return <FormControl>
+    _renderSelector = (order, title, data, type) => {
+        return <FormControl className={this.props.classes.textField}>
             <InputLabel>{title}</InputLabel>
             <Select
-                style={{minWidth: 150}}
                 value={this.state.players[order][type]}
                 onChange={this._inputPlayerRecord(order, type)}
             >
@@ -85,7 +106,7 @@ class ClanRecord extends PureComponent {
     };
 
     render() {
-        const {users, clans} = this.props;
+        const {users, clans, game, classes} = this.props;
 
         return (
             <section className="recode-game">
@@ -93,48 +114,51 @@ class ClanRecord extends PureComponent {
                     Object.keys(this.state.players)
                         .map(order => {
                             return (
-                                <div className="score-record-box"
-                                     key={order}
+                                <Paper className={classes.paper}
+                                       key={order}
                                 >
-                                    <span>{order}</span>
+                                    <div>{order}</div>
                                     {
-                                        this._renderSelect(order, '이름', users, 'name')
+                                        this._renderSelector(order, '이름', users, 'name')
                                     }
                                     {
-                                        this._renderSelect(order, '종족', clans, 'clan')
+                                        this._renderSelector(order, '종족', clans, 'clan')
                                     }
-                                    <FormControl>
-                                        <InputLabel>점수</InputLabel>
-                                        <Input className='record-input'
+                                    <TextField className={classes.textField}
+                                               label={'점수'}
                                                onChange={this._inputPlayerRecord(order, 'score')}
                                                type={'number'}
-                                        />
-                                    </FormControl>
-                                    <FormControl>
-                                        <InputLabel>점수</InputLabel>
-                                        <Input className='record-input'
-                                               onChange={this._inputPlayerRecord(order, 'score')}
+                                    />
+                                    <TextField className={classes.textField}
+                                               label={'비딩'}
+                                               onChange={this._inputPlayerRecord(order, 'bidding')}
                                                type={'number'}
-                                        />
-                                    </FormControl>
-                                </div>
+                                    />
+                                </Paper>
                             )
                         })
                 }
-                <IconButton onClick={this._addPlayer}>
+                <IconButton onClick={this._addPlayer}
+                            disabled={this.state.playerCount >= game.max}
+                >
                     <i className={'mdi mdi-plus'}/>
                 </IconButton>
                 <IconButton onClick={this._removePlayer}
-                            disabled={this.state.playerCount <= 1}
+                            disabled={this.state.playerCount <= game.min}
                 >
                     <i className={'mdi mdi-minus'}/>
                 </IconButton>
                 <br/>
-                <Button variant="contained"
+                <Button className={classes.button}
+                        variant="contained"
                         color="primary"
                         onClick={this._onSave}
                 >
                     기록
+                </Button>
+                <Button variant="contained"
+                        component={Link} to="/recordGame" color="primary" onClick={() => this.props.selectGame(game.originalName)}>
+                    취소
                 </Button>
             </section>
         )
@@ -147,4 +171,4 @@ ClanRecord.propTypes = {
     bid: PropTypes.bool
 };
 
-export default ClanRecord;
+export default withStyles(styles)(ClanRecord);

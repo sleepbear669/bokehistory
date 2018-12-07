@@ -65,9 +65,9 @@ export default class RecordGame extends PureComponent {
     };
     _generateRecord = (game) => {
         const {users} = this.props;
-        console.log(game);
         if (game.clan) {
             return <ClanRecord
+                game={game}
                 clans={game.clans}
                 bid={game.bid}
                 users={users}
@@ -75,13 +75,14 @@ export default class RecordGame extends PureComponent {
             />
         }
         return <NormalRecord
+            game={game}
             users={users}
             onSave={this._onSaveRecord}
         />
     };
 
     render() {
-        const {games, users} = this.props;
+        const {games} = this.props;
 
         return (
             <section className="recode-game">
@@ -93,10 +94,6 @@ export default class RecordGame extends PureComponent {
                 {
                     this.state.game && this._generateRecord(this.state.game)
                 }
-                <NormalRecord
-                    users={users}
-                    onSave={this._onSaveRecord}
-                />
             </section>
         )
     }

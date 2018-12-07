@@ -1,7 +1,8 @@
 import React, {PureComponent} from 'react';
 import PropTypes from 'prop-types';
 import produce from "immer";
-import {MenuItem, Input, Select, FormControl, InputLabel, Button, IconButton} from "@material-ui/core";
+import {MenuItem, Input, Select, Button, IconButton} from "@material-ui/core";
+import {Link} from "react-router-dom";
 
 const players = {
     1: {
@@ -108,6 +109,10 @@ class NormalRecord extends PureComponent {
                         onClick={this._onSave}
                 >
                     기록
+                </Button>
+                <Button variant="contained"
+                        component={Link} to="/recordGame" color="primary" onClick={() => this.props.selectGame(game.originalName)}>
+                    취소
                 </Button>
             </section>
         )
