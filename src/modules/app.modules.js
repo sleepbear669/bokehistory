@@ -5,26 +5,32 @@ import gameService from './../shared/services/gameService';
 export const FETCH_GAMES = 'FETCH_GAMES';
 export const SELECT_GAME = 'SELECT_GAME';
 
-const clans = [{name: '발타크'},
-    {name: '매드 안드로이드'},
-    {name: '테란'},
-    {name: '기오덴'},
-    {name: '란티다'},
-    {name: '파이락'},
-    {name: '글린'},
-    {name: '제노스'},
-    {name: '아이타'},
-    {name: '네뷸라'},
-    {name: '하이브'},
-    {name: '하드쉬 할라'},
-    {name: '엠바스'},
-    {name: '타클론'}];
+const clans = [{name : '아우렌'},
+    {name : '마녀'},
+    {name : '연금술사'},
+    {name : '암흑인'},
+    {name : '광신도'},
+    {name : '소인'},
+    {name : '난쟁이'},
+    {name : '기술자'},
+    {name : '인어'},
+    {name : '군집어인'},
+    {name : '혼돈술사'},
+    {name : '거인'},
+    {name : '고행수도자'},
+    {name : '유목민'},
+    {name : '얼음 여인'},
+    {name : '설인'},
+    {name : '봉헌자'},
+    {name : '용군주'},
+    {name : '연안민'},
+    {name : '둔갑술사'}];
 
 
 export function fetchGames() {
     return async (dispatch) => {
         const games = await gameService.fetchGames();
-        // gameService.updateClan('gaia_project', clans);
+        gameService.updateClan('terra_mystica', clans);
         dispatch({type: FETCH_GAMES, games});
     }
 }

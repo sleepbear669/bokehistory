@@ -1,8 +1,36 @@
 import React, {PureComponent} from 'react';
 import PropTypes from 'prop-types';
 import produce from "immer";
-import {MenuItem, Input, Select, Button, IconButton} from "@material-ui/core";
+import {
+    MenuItem,
+    Paper,
+    Input,
+    Select,
+    Button,
+    IconButton,
+    TextField,
+    FormControl,
+    InputLabel
+} from "@material-ui/core";
+import {withStyles} from '@material-ui/core/styles';
 import {Link} from "react-router-dom";
+
+const styles = theme => ({
+    button: {
+        margin: theme.spacing.unit,
+    },
+    paper: {
+        padding: theme.spacing.unit,
+        margin: theme.spacing.unit
+    },
+    textField: {
+        marginLeft: theme.spacing.unit,
+        marginRight: theme.spacing.unit,
+        minWidth: 100,
+        maxWidth: 200,
+    }
+});
+
 
 const players = {
     1: {
@@ -63,8 +91,26 @@ class NormalRecord extends PureComponent {
         this.props.onSave(this.state.players);
     };
 
+    _renderSelector = (order, title, data, type) => {
+        return <FormControl className={this.props.classes.textField}>
+            <InputLabel>{title}</InputLabel>
+            <Select
+                value={this.state.players[order][type]}
+                onChange={this._inputPlayerRecord(order, type)}
+            >
+                {
+                    data.map(d => {
+                        return <MenuItem value={d.name}
+                                         key={d.name}>{d.name}</MenuItem>
+                    })
+                }
+            </Select>
+        </FormControl>
+    };
+
+
     render() {
-        const {users} = this.props;
+        const {users, classes} = this.props;
 
         return (
             <section className="recode-game">
@@ -72,26 +118,20 @@ class NormalRecord extends PureComponent {
                     Object.keys(this.state.players)
                         .map(order => {
                             return (
-                                <div className="score-record-box"
-                                     key={order}
+                                <Paper className={classes.paper}
+                                       key={order}
                                 >
-                                    <span>{order}</span>
-                                    <Select
-                                        style={{minWidth: 150}}
-                                        value={this.state.players[order]['name']}
-                                        onChange={this._inputPlayerRecord(order, 'name')}
-                                    >
-                                        {
-                                            users.map(game => {
-                                                return <MenuItem value={game.name} key={game.name}>{game.name}</MenuItem>
-                                            })
-                                        }
-                                    </Select>
-                                    <Input className='record-input' placeholder='점수'
-                                           onChange={this._inputPlayerRecord(order, 'score')}
-                                           type={'number'}
+                                    <div>{order}</div>
+                                    {
+                                        this._renderSelector(order, '이름', users, 'name')
+
+                                    }
+                                    <TextField className={classes.textField}
+                                               label={'점수'}
+                                               onChange={this._inputPlayerRecord(order, 'score')}
+                                               type={'number'}
                                     />
-                                </div>
+                                </Paper>
                             )
                         })
                 }
@@ -104,14 +144,16 @@ class NormalRecord extends PureComponent {
                     <i className={'mdi mdi-minus'}/>
                 </IconButton>
                 <br/>
-                <Button variant="contained"
+                <Button className={classes.button}
+                        variant="contained"
                         color="primary"
                         onClick={this._onSave}
                 >
                     기록
                 </Button>
                 <Button variant="contained"
-                        component={Link} to="/recordGame" color="primary" onClick={() => this.props.selectGame(game.originalName)}>
+                        component={Link} to="/recordGame" color="primary"
+                        onClick={() => this.props.selectGame(game.originalName)}>
                     취소
                 </Button>
             </section>
@@ -123,4 +165,4 @@ NormalRecord.propTypes = {
     onSave: PropTypes.func
 };
 
-export default NormalRecord;
+export default withStyles(styles)(NormalRecord);
