@@ -7,6 +7,7 @@ import {sortBy} from 'lodash';
 import {GameSelect} from 'components';
 import NormalRecord from './components/NormalRecord';
 import ClanRecord from './components/ClanRecord';
+import MahjongRecord from './components/MahjongRecord';
 
 const players = {
     1: {
@@ -73,6 +74,13 @@ export default class RecordGame extends PureComponent {
                 users={users}
                 onSave={this._onSaveRecord}
             />
+        } else if(game.mahjong){
+            return <MahjongRecord
+                game={game}
+                users={users}
+                onSave={this._onSaveRecord}
+            />
+
         }
         return <NormalRecord
             game={game}

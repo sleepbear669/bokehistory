@@ -19,18 +19,21 @@ export default class BokeGameList extends PureComponent {
             <CardHeader
                 title={game.name}
             />
+            <CardActions>
+                <Button component={Link} to="/gameHistory" size="small" color="primary"
+                        onClick={() => this.props.selectGame(game.originalName)}>
+                    게임통계
+                </Button>
+                <Button component={Link} to="/recordGame" size="small" color="primary"
+                        onClick={() => this.props.selectGame(game.originalName)}>
+                    점수기록
+                </Button>
+            </CardActions>
             <CardMedia
                 component="img"
                 src={game.thumbnail}
             />
-            <CardActions>
-                <Button component={Link} to="/gameHistory" size="small" color="primary" onClick={() => this.props.selectGame(game.originalName)}>
-                    게임통계
-                </Button>
-                <Button component={Link} to="/recordGame" size="small" color="primary" onClick={() => this.props.selectGame(game.originalName)}>
-                    점수기록
-                </Button>
-            </CardActions>
+
         </Card>
     };
 

@@ -137,7 +137,6 @@ class GameHistory extends React.Component {
                     }
                 })
         }
-        console.log(gameData);
 
         return (
             <Paper className={classes.root}>
