@@ -31,6 +31,7 @@ const styles = theme => ({
     }
 });
 
+const gameType = ['동장', '남장(반장)', '서장', '북장(전장)'];
 
 const players = {
     1: {
@@ -58,6 +59,7 @@ const players = {
 class MahjongRecord extends PureComponent {
     state = {
         players,
+        gameType: '남장(반장)',
         playerCount: Object.keys(players).length
     };
 
@@ -118,6 +120,17 @@ class MahjongRecord extends PureComponent {
 
         return (
             <section className="recode-game">
+                <Select className={classes.textField}
+                        value={this.state.gameType}
+                        onChange={e => this.setState({gameType: e.target.value})}
+                >
+                    {
+                        gameType.map(t => {
+                            return <MenuItem value={t}
+                                             key={t}>{t}</MenuItem>
+                        })
+                    }
+                </Select>
                 {
                     Object.keys(this.state.players)
                         .map(order => {
