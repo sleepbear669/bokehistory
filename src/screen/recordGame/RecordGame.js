@@ -46,7 +46,7 @@ export default class RecordGame extends PureComponent {
 
     _onSelectGame = event => {
         this.onProduce(draft => {
-            draft.game = event.target.value;
+            draft.game = this.props.games.find(g => g.originalName === event.target.value);
         });
     };
 
@@ -74,7 +74,8 @@ export default class RecordGame extends PureComponent {
                 users={users}
                 onSave={this._onSaveRecord}
             />
-        } else if(game.mahjong){
+        }
+        if (game.mahjong) {
             return <MahjongRecord
                 game={game}
                 users={users}

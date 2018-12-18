@@ -35,6 +35,7 @@ export default class RegistryGame extends PureComponent {
         bid: false,
         clan: false,
         mahjong: false,
+        rating:false,
         thumbnail: null,
         error: false
     };
@@ -50,11 +51,11 @@ export default class RegistryGame extends PureComponent {
     };
 
     _submit = () => {
-        const {name, originalName, min, max, bid, clan, thumbnail, mahjong} = this.state;
+        const {name, originalName, min, max, bid, clan, thumbnail, mahjong, rating} = this.state;
         if (thumbnail === null) {
             return alert('이미지를 등록해주세요');
         }
-        this.props.addGame({name, originalName, min, max, bid, clan, mahjong}, thumbnail)
+        this.props.addGame({name, originalName, min, max, bid, clan, mahjong, rating}, thumbnail)
             .then(() => {
                 alert(`${this.state.name} 등록 완료`);
                 this.setState({name: '', error: false});

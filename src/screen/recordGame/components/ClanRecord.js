@@ -72,7 +72,6 @@ class ClanRecord extends PureComponent {
         return event => {
             this.onProduce(draft => {
                 draft.players[order][field] = event.target.value;
-
             });
         };
     };

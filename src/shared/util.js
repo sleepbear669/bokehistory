@@ -184,3 +184,10 @@ window.isChrome = function () {
 window.getTime = function getTime() {
     return (new Date()).getTime();
 };
+
+
+const elo_k = 16;
+export function elo(a, b, rank, k = elo_k) {
+    const winRate = 1.0 / (1.0 + Math.pow(10, (b - a) / 400));
+    return k * (rank - winRate);
+}
