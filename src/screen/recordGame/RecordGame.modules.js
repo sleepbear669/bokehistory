@@ -5,7 +5,7 @@ import userService from './../../shared/services/userService';
 
 const SAVE_RECORD = 'SAVE_RECORD';
 const FETCH_USER = 'FETCH_USER';
-
+const FETCH_RATING = 'FETCH_RATING';
 
 export function requestSaveRecord(record) {
     return async dispatch => {
@@ -31,6 +31,16 @@ export function fetchUser() {
     };
 }
 
+export function fetchRating(gameOriginalName) {
+    return async dispatch => {
+        try {
+            const ratings = await gameService.fetchRating(gameOriginalName);
+            dispatch({type: FETCH_RATING, ratings});
+        } catch (e) {
+            console.log(e);
+        }
+    };
+}
 
 const ACTION_HANDLERS = {
     [SAVE_RECORD]: produce((draft, action) => {
@@ -39,10 +49,14 @@ const ACTION_HANDLERS = {
     [FETCH_USER]: produce((draft, action) => {
         draft.users = action.users;
     }),
+    [FETCH_RATING]: produce((draft, action) => {
+        draft.rating = action.rating;
+    }),
 };
 
 const initialState = {
-    users: []
+    users: [],
+    ratings: []
 };
 
 

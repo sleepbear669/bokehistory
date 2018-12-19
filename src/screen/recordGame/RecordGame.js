@@ -28,6 +28,13 @@ const players = {
     }
 };
 
+const elo_k = 16;
+
+function elo(a, b, rank, k = elo_k) {
+    const winRate = 1.0 / (1.0 + Math.pow(10, (b - a) / 400));
+    return parseInt(k * (rank - winRate));
+}
+
 export default class RecordGame extends PureComponent {
     state = {
         game: this.props.game,
@@ -37,7 +44,7 @@ export default class RecordGame extends PureComponent {
     };
 
     componentDidMount() {
-        this.props.fetchUser();
+        Promise.all([this.props.fetchUser(), this.props.fetchRating(this.props.game.originalName)]);
     }
 
     onProduce = (producer) => {
@@ -50,13 +57,47 @@ export default class RecordGame extends PureComponent {
         });
     };
 
+    calculateResultRating(gameResult){
+        const {ratings} = this.props;
+
+        const gameUserRating = gameResult.map(r => {
+                let userRating = ratings.find(rating => rating.name === r.name);
+                if (userRating === undefined) {
+                    userRating = {
+                        name: r.name,
+                        rating: 1000,
+                        updated: getTime()
+                    }
+                }
+                return userRating;
+            }
+        );
+
+        gameUserRating.forEach((rating, i) => {
+            if (i === 0) {
+                const loseTeamAvgRating = gameUserRating.slice(1).reduce((a, b) => a + b.rating, 0) / (gameUserRating.length - 1);
+                rating.rating += elo(rating.rating, loseTeamAvgRating, 1);
+            }
+            if (i === 1) {
+                rating.rating += elo(rating.rating, gameUserRating[0].rating, 0.5);
+            }
+            if (i > 1) {
+                rating.rating += elo(rating.rating, gameUserRating[0].rating, 0);
+            }
+        });
+    }
+
     _onSaveRecord = (players) => {
+        const {ratings} = this.props;
+        const gameResult = sortBy(Object.values(players), (obj) => parseInt(obj.score))
+            .reverse()
+            .map((r, i) => ({...r, rank: i + 1}));
+        const gameUserRating = this.calculateResultRating(gameResult);
 
         const gameRecord = {
             game: this.state.game.originalName,
             players,
-            gameResult: sortBy(Object.values(players), (obj) => parseInt(obj.score)).reverse()
-                .map((r, i) => ({...r, rank: i + 1}))
+            gameResult
         };
         this.props.requestSaveRecord(gameRecord)
             .then(_ => {
@@ -92,7 +133,6 @@ export default class RecordGame extends PureComponent {
 
     render() {
         const {games} = this.props;
-
         return (
             <section className="recode-game">
                 <GameSelect

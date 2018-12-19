@@ -34,4 +34,9 @@ export default class gameService {
         return gamesCollection.doc(name).collection('records').get()
             .then(snapshot => snapshot.docs.map(doc => doc.data()));
     }
+
+    static fetchRating(name) {
+        return gamesCollection.doc(name).collection('rating').get()
+            .then(snapshot => snapshot.docs.map(doc => doc.data()));
+    }
 }
