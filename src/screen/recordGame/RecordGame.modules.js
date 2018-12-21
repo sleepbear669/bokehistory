@@ -13,7 +13,7 @@ export function requestSaveRecord(record, ratingResult) {
         try {
             await gameService.recordGame(record);
             await userService.recordGame(record);
-            await ratingService.updateClan(record.game, ratingResult);
+            await gameService.updateRating(record.game, ratingResult);
             dispatch({type: SAVE_RECORD});
         } catch (e) {
             console.log(e);
@@ -51,7 +51,7 @@ const ACTION_HANDLERS = {
         draft.users = action.users;
     }),
     [FETCH_RATING]: produce((draft, action) => {
-        draft.rating = action.rating;
+        draft.ratings = action.ratings;
     }),
 };
 

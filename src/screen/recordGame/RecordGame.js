@@ -59,17 +59,13 @@ export default class RecordGame extends PureComponent {
 
     calculateResultRating(gameResult) {
         const {ratings} = this.props;
-
         const gameUserRating = gameResult.map(r => {
                 let userRating = ratings.find(rating => rating.name === r.name);
-                if (userRating === undefined) {
-                    userRating = {
-                        name: r.name,
-                        rating: 1000,
-                        updated: getTime()
-                    }
-                }
-                return userRating;
+                return {
+                    name: r.name,
+                    rating: userRating ? userRating.rating : 1000,
+                    updated: getTime()
+                };
             }
         );
 
@@ -99,7 +95,6 @@ export default class RecordGame extends PureComponent {
     }
 
     _onSaveRecord = (players) => {
-        const {ratings} = this.props;
         const gameResult = sortBy(Object.values(players), (obj) => parseInt(obj.score))
             .reverse()
             .map((r, i) => ({...r, rank: i + 1}));
@@ -109,12 +104,13 @@ export default class RecordGame extends PureComponent {
             players,
             gameResult
         };
-        this.props.requestSaveRecord(gameRecord, ratingResult)
+        this.props.requestSaveRecord(gameRecord, gameUserRating)
             .then(_ => {
                 alert('저장 완료');
                 this.props.selectGame(this.state.game.originalName);
             })
     };
+
     _generateRecord = (game) => {
         const {users} = this.props;
         if (game.clan) {

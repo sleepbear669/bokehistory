@@ -2,6 +2,8 @@ import fireStore, {storage} from './../fireStore';
 
 const gamesCollection = fireStore.collection('games');
 const storageRef = storage.ref();
+const batch = fireStore.batch();
+
 export default class gameService {
 
     static async addGame(gameInfo, thumbnail) {
@@ -36,7 +38,16 @@ export default class gameService {
     }
 
     static fetchRating(name) {
-        return gamesCollection.doc(name).collection('rating').get()
+        return gamesCollection.doc(name).collection('ratings').get()
             .then(snapshot => snapshot.docs.map(doc => doc.data()));
+    }
+
+    static updateRating(gameName, ratingResult) {
+        ratingResult.map(r => {
+            const ref = gamesCollection.doc(gameName).collection('ratings')
+                .doc(r.name);
+            batch.set(ref, r);
+        });
+        return batch.commit();
     }
 }
