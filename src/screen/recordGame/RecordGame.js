@@ -57,7 +57,7 @@ export default class RecordGame extends PureComponent {
         });
     };
 
-    calculateResultRating(gameResult){
+    calculateResultRating(gameResult) {
         const {ratings} = this.props;
 
         const gameUserRating = gameResult.map(r => {
@@ -73,17 +73,28 @@ export default class RecordGame extends PureComponent {
             }
         );
 
-        gameUserRating.forEach((rating, i) => {
-            if (i === 0) {
-                const loseTeamAvgRating = gameUserRating.slice(1).reduce((a, b) => a + b.rating, 0) / (gameUserRating.length - 1);
-                rating.rating += elo(rating.rating, loseTeamAvgRating, 1);
+        for (let i = 0; i < gameUserRating.length; i++) {
+            let changePoint = 0;
+            const current = gameUserRating[i];
+            for (let j = 0; j < gameUserRating.length; j++) {
+                const opponent = gameUserRating[j];
+                if (i !== j) {
+                    let s;
+                    if (gameResult[i].score > gameResult[j].score)
+                        s = 1;
+                    if (gameResult[i].score < gameResult[j].score)
+                        s = 0;
+                    if (gameResult[i].score === gameResult[j].score)
+                        s = 0.5;
+                    changePoint += elo(current.rating, opponent.rating, s);
+                }
             }
-            if (i === 1) {
-                rating.rating += elo(rating.rating, gameUserRating[0].rating, 0.5);
-            }
-            if (i > 1) {
-                rating.rating += elo(rating.rating, gameUserRating[0].rating, 0);
-            }
+            current.nextRating = current.rating + changePoint;
+        }
+        return gameUserRating.map(r => {
+            r.rating = r.nextRating;
+            delete r.nextRating;
+            return r;
         });
     }
 
@@ -93,16 +104,15 @@ export default class RecordGame extends PureComponent {
             .reverse()
             .map((r, i) => ({...r, rank: i + 1}));
         const gameUserRating = this.calculateResultRating(gameResult);
-
         const gameRecord = {
             game: this.state.game.originalName,
             players,
             gameResult
         };
-        this.props.requestSaveRecord(gameRecord)
+        this.props.requestSaveRecord(gameRecord, ratingResult)
             .then(_ => {
                 alert('저장 완료');
-                this.props.selectGame(this.state.game);
+                this.props.selectGame(this.state.game.originalName);
             })
     };
     _generateRecord = (game) => {
@@ -135,11 +145,14 @@ export default class RecordGame extends PureComponent {
         const {games} = this.props;
         return (
             <section className="recode-game">
-                <GameSelect
-                    games={games}
-                    value={this.state.game.originalName}
-                    onChange={this._onSelectGame}
-                />
+                {
+                    this.state.game &&
+                    <GameSelect
+                        games={games}
+                        value={this.state.game.originalName}
+                        onChange={this._onSelectGame}
+                    />
+                }
                 {
                     this.state.game && this._generateRecord(this.state.game)
                 }

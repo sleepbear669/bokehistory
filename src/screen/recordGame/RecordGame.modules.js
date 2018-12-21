@@ -2,17 +2,18 @@ import produce from 'immer';
 
 import gameService from './../../shared/services/gameService'
 import userService from './../../shared/services/userService';
+import ratingService from './../../shared/services/ratingService';
 
 const SAVE_RECORD = 'SAVE_RECORD';
 const FETCH_USER = 'FETCH_USER';
 const FETCH_RATING = 'FETCH_RATING';
 
-export function requestSaveRecord(record) {
+export function requestSaveRecord(record, ratingResult) {
     return async dispatch => {
-
         try {
             await gameService.recordGame(record);
             await userService.recordGame(record);
+            await ratingService.updateClan(record.game, ratingResult);
             dispatch({type: SAVE_RECORD});
         } catch (e) {
             console.log(e);

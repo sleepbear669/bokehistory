@@ -7,7 +7,7 @@ export default class gameService {
         return ratingCollection.doc(gameName).get().then(doc => doc.data());
     };
 
-    static updateClan(gameName, clans) {
-        return ratingCollection.doc(gameName).update({clans})
+    static updateRating(gameName, ratingResult) {
+        return ratingCollection.doc(gameName).update({...ratingResult})
     }
 }
