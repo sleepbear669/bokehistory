@@ -35,6 +35,7 @@ function getSorting(order, orderBy) {
 }
 
 const historyRows = [
+    {id: 'rating', numeric: true, disablePadding: false, label: 'MMR'},
     {id: 'average', numeric: true, disablePadding: false, label: '평균'},
     {id: 'winRate', numeric: true, disablePadding: false, label: '승률'},
     {id: 'playCount', numeric: true, disablePadding: false, label: '게임수'},
@@ -54,7 +55,7 @@ class EnhancedTableHead extends React.Component {
                 <TableRow>
                     <TableCell padding='none'>순위</TableCell>
                     <TableCell padding='none'>이름</TableCell>
-                    {historyRows.map((row,i) => {
+                    {historyRows.map((row, i) => {
                         return (
                             <TableCell
                                 key={i}
@@ -97,7 +98,7 @@ const styles = theme => ({
 class GameHistory extends React.Component {
     state = {
         order: 'desc',
-        orderBy: 'average'
+        orderBy: 'rating'
     };
 
     componentDidMount() {
@@ -122,22 +123,8 @@ class GameHistory extends React.Component {
     };
 
     render() {
-        const {classes} = this.props;
+        const {classes, gameResult} = this.props;
         const {order, orderBy} = this.state;
-        let gameData = [];
-        if (this.props.gameResult !== null) {
-            gameData = Object.keys(this.props.gameResult)
-                .map(k => {
-                    const playerHistory = this.props.gameResult[k];
-                    return {
-                        name: k,
-                        average: (playerHistory.reduce((a, b) => a + parseInt(b.score), 0) / playerHistory.length),
-                        winRate: (playerHistory.filter(r => r.rank === 1).length / playerHistory.length) * 100,
-                        playCount: playerHistory.length,
-                    }
-                })
-        }
-
         return (
             <Paper className={classes.root}>
                 <div className={classes.tableWrapper}>
@@ -148,7 +135,7 @@ class GameHistory extends React.Component {
                             onRequestSort={this.handleRequestSort}
                         />
                         <TableBody>
-                            {stableSort(gameData, getSorting(order, orderBy))
+                            {stableSort(gameResult, getSorting(order, orderBy))
                                 .map((n, i) => {
                                     return (
                                         <TableRow
@@ -161,6 +148,7 @@ class GameHistory extends React.Component {
                                             <TableCell component="th" scope="row" padding="none">
                                                 {n.name}
                                             </TableCell>
+                                            <TableCell numeric>{n.rating}</TableCell>
                                             <TableCell numeric>{n.average}</TableCell>
                                             <TableCell numeric>{n.winRate}</TableCell>
                                             <TableCell numeric>{n.playCount}</TableCell>
