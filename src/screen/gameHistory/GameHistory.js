@@ -53,8 +53,8 @@ class EnhancedTableHead extends React.Component {
         return (
             <TableHead>
                 <TableRow>
-                    <TableCell padding='none'>순위</TableCell>
-                    <TableCell padding='none'>이름</TableCell>
+                    <TableCell padding='checkbox'>순위</TableCell>
+                    <TableCell padding='dense'>이름</TableCell>
                     {historyRows.map((row, i) => {
                         return (
                             <TableCell
@@ -88,7 +88,6 @@ EnhancedTableHead.propTypes = {
 const styles = theme => ({
     root: {
         width: '100%',
-        marginTop: theme.spacing.unit * 3,
     },
     tableWrapper: {
         overflowX: 'auto',
@@ -142,15 +141,15 @@ class GameHistory extends React.Component {
                                             hover
                                             key={i}
                                         >
-                                            <TableCell component="th" scope="row" padding="none">
+                                            <TableCell component="th" padding="none" style={{textAlign: 'center'}}>
                                                 {i + 1}
                                             </TableCell>
-                                            <TableCell component="th" scope="row" padding="none">
+                                            <TableCell component="th" padding="none">
                                                 {n.name}
                                             </TableCell>
                                             <TableCell numeric>{n.rating}</TableCell>
-                                            <TableCell numeric>{n.average}</TableCell>
-                                            <TableCell numeric>{n.winRate}</TableCell>
+                                            <TableCell numeric>{n.average.toFixed(2)}</TableCell>
+                                            <TableCell numeric>{n.winRate.toFixed(2)}%</TableCell>
                                             <TableCell numeric>{n.playCount}</TableCell>
                                         </TableRow>
                                     );

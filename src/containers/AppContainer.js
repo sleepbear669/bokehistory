@@ -54,6 +54,7 @@ const styles = theme => ({
         display: 'flex',
         flex: 1,
         flexGrow: 1,
+        padding: theme.spacing.unit * 2,
         backgroundColor: theme.palette.background.default,
         minWidth: 150,
         overflow: 'auto',

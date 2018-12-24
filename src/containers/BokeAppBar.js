@@ -7,6 +7,9 @@ const styles = theme => ({
     appBar: {
         height: 48,
         zIndex: theme.zIndex.drawer + 1,
+    },
+    header: {
+        margin: 0
     }
 });
 
@@ -19,13 +22,13 @@ const BokeAppBar = (props) => {
         <AppBar position="relative"
                 color="primary"
                 className={classes.appBar}>
-            <Typography variant="title" color="inherit">
+            div.
+            <h1 className={classes.header}>
                 보드케이브
-                {
-                    title && <span>{title.name}</span>
-                }
-
-            </Typography>
+            </h1>
+            {
+                title && <h6>{title.name}</h6>
+            }
         </AppBar>
     )
 };
