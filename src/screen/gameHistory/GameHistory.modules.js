@@ -15,7 +15,6 @@ const ACTION_HANDLERS = {
             a[b.name].push(b);
             return a;
         }, {});
-        console.log(ratings);
         draft.gameResult = Object.keys(gameResult)
             .map(k => {
                 const playerHistory = gameResult[k];

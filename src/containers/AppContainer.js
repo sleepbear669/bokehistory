@@ -6,7 +6,7 @@ import {
     Drawer,
     List,
     ListItem,
-    ListItemText, Select, MenuItem
+    ListItemText
 } from '@material-ui/core';
 import {
     blue
@@ -22,7 +22,7 @@ import {
     GameSelect
 } from 'components';
 
-import {fetchGames, selectGame} from './../modules/app.modules.js';
+import {fetchGames, selectGame, resetGame} from './../modules/app.modules.js';
 
 import BokeAppBar from './BokeAppBar';
 
@@ -82,6 +82,7 @@ class AppContainer extends Component {
                         <div className={classes.root}>
                             <BokeAppBar
                                 title={game}
+                                onClick={this.props.resetGame}
                             />
                             {
                                 game !== null &&
@@ -141,4 +142,4 @@ export default connect(state => (
             game: state.app.game
         }
     )
-    , {fetchGames, selectGame})(appContainer)
+    , {fetchGames, selectGame, resetGame})(appContainer)

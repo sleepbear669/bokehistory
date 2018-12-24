@@ -1,6 +1,6 @@
 import React from 'react'
 import {AppBar, Typography} from "@material-ui/core";
-
+import {Link} from 'react-router-dom'
 import {withStyles} from '@material-ui/core/styles';
 
 const styles = theme => ({
@@ -22,12 +22,11 @@ const BokeAppBar = (props) => {
         <AppBar position="relative"
                 color="primary"
                 className={classes.appBar}>
-            div.
-            <h1 className={classes.header}>
-                보드케이브
-            </h1>
+            <h2 className={classes.header} onClick={props.onClick}>
+                <Link style={{color: 'white'}} to='/'>보드케이브</Link>
+            </h2>
             {
-                title && <h6>{title.name}</h6>
+                title && <h5 className={classes.header}>{title.name}</h5>
             }
         </AppBar>
     )

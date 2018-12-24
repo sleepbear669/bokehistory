@@ -5,6 +5,7 @@ import ratingService from './../shared/services/ratingService';
 
 export const FETCH_GAMES = 'FETCH_GAMES';
 export const SELECT_GAME = 'SELECT_GAME';
+export const RESET_GAME = 'RESET_GAME';
 
 const clans = [{name: '아우렌'},
     {name: '마녀'},
@@ -40,12 +41,19 @@ export function selectGame(gameName) {
     return {type: SELECT_GAME, gameName}
 }
 
+export function resetGame() {
+    return {type: RESET_GAME}
+}
+
 const ACTION_HANDLERS = {
     [FETCH_GAMES]: produce((draft, action) => {
         draft.games = action.games;
     }),
     [SELECT_GAME]: produce((draft, action) => {
         draft.game = draft.games.find(g => g.originalName === action.gameName);
+    }),
+    [RESET_GAME]: produce((draft, action) => {
+        draft.game = null;
     }),
 };
 

@@ -60,7 +60,8 @@ class MahjongRecord extends PureComponent {
     state = {
         players,
         gameType: '남장(반장)',
-        playerCount: Object.keys(players).length
+        playerCount: Object.keys(players).length,
+        errorMsg: ''
     };
 
     onProduce = (producer) => {
@@ -94,7 +95,13 @@ class MahjongRecord extends PureComponent {
     };
 
     _onSave = () => {
-        this.props.onSave(this.state.players);
+        const totalScore = Object.values(this.state.players).reduce((a, b) => a + parseInt(b.score), 0);
+        if (totalScore === 0) {
+            this.props.onSave(this.state.players);
+        } else {
+            this.setState({errorMsg: `총합 : ${totalScore} 점수를 확인해 주세요`});
+        }
+
     };
 
     _renderSelector = (order, title, data, type) => {
@@ -161,6 +168,12 @@ class MahjongRecord extends PureComponent {
                     <i className={'mdi mdi-minus'}/>
                 </IconButton>
                 <br/>
+                {
+                    this.state.errorMsg !== '' &&
+                    <p className={'warning'}>
+                        <span>{this.state.errorMsg}</span>
+                    </p>
+                }
                 <Button className={classes.button}
                         variant="contained"
                         color="primary"

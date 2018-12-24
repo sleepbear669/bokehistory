@@ -6,6 +6,15 @@ html {
     box-sizing: border-box;
 }
 
+a {
+    text-decoration: none !important;
+    &:hover {
+        color: white;
+        text-decoration: none;
+        cursor: pointer;
+    }
+}
+
 html,
 body {
     margin: 0;

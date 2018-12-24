@@ -108,6 +108,7 @@ export default class RecordGame extends PureComponent {
             .then(_ => {
                 alert('저장 완료');
                 this.props.selectGame(this.state.game.originalName);
+                this.props.history.push('/gameHistory');
             })
     };
 
