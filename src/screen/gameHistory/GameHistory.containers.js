@@ -10,6 +10,7 @@ const mapStateToProps = (state) => ({
     game: state.app.game,
     records: state.gameHistory.records,
     gameResult: state.gameHistory.gameResult,
+    ratings: state.gameHistory.ratings,
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(GameHistory)

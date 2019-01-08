@@ -115,7 +115,7 @@ class ClanRecord extends PureComponent {
     };
 
     render() {
-        const {users, clans, game, classes} = this.props;
+        const {users, clans, game, classes, bid} = this.props;
 
         return (
             <section className="recode-game">
@@ -138,11 +138,14 @@ class ClanRecord extends PureComponent {
                                                onChange={this._inputPlayerRecord(order, 'score')}
                                                type={'number'}
                                     />
-                                    <TextField className={classes.textField}
-                                               label={'비딩'}
-                                               onChange={this._inputPlayerRecord(order, 'bidding')}
-                                               type={'number'}
-                                    />
+                                    {
+                                        bid &&
+                                        <TextField className={classes.textField}
+                                                   label={'비딩'}
+                                                   onChange={this._inputPlayerRecord(order, 'bidding')}
+                                                   type={'number'}
+                                        />
+                                    }
                                 </Paper>
                             )
                         })
